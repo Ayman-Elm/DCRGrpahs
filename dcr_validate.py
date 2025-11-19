@@ -1,109 +1,153 @@
 #!/usr/bin/env python3
-# dcr_validate.py — validate JSON against DCR Repository (/api/graphs/validate)
+# dcr_validate.py — local validator for simple DCR JSON
+#
+# It checks:
+# - JSON is valid
+# - DCRModel[0].events exists and all events have non-empty "id"
+# - DCRModel[0].rules exists and each rule has type/source/target
+# - rule source/target must refer to an existing event id
+# - event ids are unique
 
-import argparse, json, sys, requests
-from requests.auth import HTTPBasicAuth
+import json
+import sys
+import argparse
+from typing import Any, Dict, List, Tuple
 
-# --- TEST CREDS (replace for your quick test) ---
-DCR_USERNAME = "ayman.elm01@gmail.com"      # <-- put your DCR email here
-DCR_PASSWORD = "AymanDCR123"   # <-- put your DCR password here
-# -------------------------------------------------
 
-FILEPATH = "test.json"
+def read_text(path: str) -> str:
+    if path in ("-", "/dev/stdin"):
+        return sys.stdin.read()
+    with open(path, "r", encoding="utf-8") as f:
+        return f.read()
 
-BASE_URL = "https://repository.dcrgraphs.net"
-VALIDATE_PATH = "/api/graphs/validate"  # you just hit this successfully
 
-def auth_probe(base: str, user: str, pwd: str, timeout: int = 30):
-    url = base.rstrip("/") + "/api/graphs"
-    r = requests.get(url, auth=HTTPBasicAuth(user, pwd), timeout=timeout)
-    if r.status_code != 200:
-        if r.status_code == 401:
-            raise SystemExit("Auth failed (401). Check username/password.")
-        if r.status_code == 403:
-            raise SystemExit("Forbidden (403). Basic Auth missing/invalid.")
-        raise SystemExit(f"Auth probe unexpected {r.status_code}: {r.text[:300]}")
+def load_dcrmodel(obj: Any) -> Dict[str, Any]:
+    """
+    Supported shapes:
+      { "DCRModel": [ { ... } ] }
+      or just { ... } with events/rules
+    """
+    if isinstance(obj, dict) and "DCRModel" in obj:
+        arr = obj["DCRModel"]
+        if isinstance(arr, list) and arr:
+            return arr[0]
+        raise SystemExit("ERROR: 'DCRModel' must be a non-empty array.")
+    if isinstance(obj, dict) and "events" in obj and "rules" in obj:
+        return obj
+    raise SystemExit("ERROR: JSON is not a simple DCRModel (no 'DCRModel' or 'events'/'rules').")
 
-def read_json_bytes(path: str) -> bytes:
-    raw = sys.stdin.read() if path in ("-", "/dev/stdin") else open(path, "r", encoding="utf-8").read()
-    try:
-        parsed = json.loads(raw)
-    except json.JSONDecodeError as e:
-        raise SystemExit(f"ERROR: Invalid JSON: {e}")
-    return json.dumps(parsed, ensure_ascii=False).encode("utf-8")
 
-def post_validate(url: str, payload: bytes, user: str, pwd: str, timeout: int):
-    headers = {
-        "Content-Type": "application/json",
-        "Accept": "application/json,text/plain,*/*"
-    }
-    return requests.post(url, data=payload, headers=headers,
-                         auth=HTTPBasicAuth(user, pwd), timeout=timeout)
+def validate_dcrmodel(m: Dict[str, Any]) -> List[str]:
+    errors: List[str] = []
 
-def main():
-    ap = argparse.ArgumentParser(description="Validate JSON payload via /api/graphs/validate.")
-    ap.add_argument("--base-url", default=BASE_URL)
-    ap.add_argument("--endpoint", default=VALIDATE_PATH)
-    ap.add_argument("--payload-file", default= FILEPATH, help="JSON file to validate (or '-' for stdin)")
-    ap.add_argument("--timeout", type=int, default=60)
-    ap.add_argument("--user")
-    ap.add_argument("--password")
-    ap.add_argument("--verbose", action="store_true", help="Print response headers too")
+    events = m.get("events")
+    if not isinstance(events, list) or not events:
+        errors.append("No 'events' array or it is empty.")
+        return errors
+
+    rules = m.get("rules")
+    if not isinstance(rules, list):
+        errors.append("No 'rules' array.")
+        return errors
+
+    # Collect event ids
+    event_ids: List[str] = []
+    for idx, ev in enumerate(events):
+        if not isinstance(ev, dict):
+            errors.append(f"Event #{idx} is not an object.")
+            continue
+        eid = ev.get("id")
+        if not isinstance(eid, str) or not eid.strip():
+            errors.append(f"Event #{idx} missing non-empty 'id'.")
+            continue
+        event_ids.append(eid)
+
+    # Check for duplicate event IDs
+    if len(event_ids) != len(set(event_ids)):
+        errors.append("Duplicate event 'id' values are not allowed.")
+
+    event_id_set = set(event_ids)
+
+    # Allowed rule types (extend if needed)
+    allowed_types = {"condition", "response", "milestone", "include", "exclude"}
+
+    for idx, r in enumerate(rules):
+        if not isinstance(r, dict):
+            errors.append(f"Rule #{idx} is not an object.")
+            continue
+
+        rtype = r.get("type")
+        src = r.get("source")
+        tgt = r.get("target")
+
+        if not isinstance(rtype, str) or not rtype.strip():
+            errors.append(f"Rule #{idx} missing 'type'.")
+        else:
+            if rtype.lower() not in allowed_types:
+                errors.append(
+                    f"Rule #{idx} has unknown type '{rtype}'. "
+                    f"Allowed: {', '.join(sorted(allowed_types))}."
+                )
+
+        if not isinstance(src, str) or not src.strip():
+            errors.append(f"Rule #{idx} missing 'source'.")
+        elif src not in event_id_set:
+            errors.append(f"Rule #{idx} source '{src}' not found in events.")
+
+        if not isinstance(tgt, str) or not tgt.strip():
+            errors.append(f"Rule #{idx} missing 'target'.")
+        elif tgt not in event_id_set:
+            errors.append(f"Rule #{idx} target '{tgt}' not found in events.")
+
+    return errors
+
+
+def validate_raw_json(raw: str) -> Tuple[Dict[str, Any], List[str]]:
+    """
+    Helper for programmatic use:
+    - parses raw JSON string
+    - extracts the DCRModel
+    - returns (model_dict, list_of_errors)
+    """
+    obj = json.loads(raw)
+    model = load_dcrmodel(obj)
+    errors = validate_dcrmodel(model)
+    return model, errors
+
+
+def main() -> None:
+    ap = argparse.ArgumentParser(
+        description="Local validator for simple DCR JSON."
+    )
+    ap.add_argument(
+        "--payload-file",
+        default="vending.txt",
+        help="File containing DCR JSON (default: vending.txt)",
+    )
     args = ap.parse_args()
 
-    user = args.user or DCR_USERNAME
-    pwd  = args.password or DCR_PASSWORD
-    if not user or not pwd:
-        raise SystemExit("Fill DCR_USERNAME/DCR_PASSWORD at top or pass --user/--password")
+    raw = read_text(args.payload_file).strip()
+    if not raw:
+        raise SystemExit(f"ERROR: {args.payload_file} is empty.")
 
-    base = args.base_url.rstrip("/")
-    url = base + args.endpoint
-
-    # 1) prove auth works
-    print("Checking Basic Auth via /api/graphs …")
-    auth_probe(base, user, pwd, args.timeout)
-    print("✓ Auth OK")
-
-    # 2) load JSON + call validate
-    payload = read_json_bytes(args.payload_file)
-    print(f"Posting JSON to: {url}")
     try:
-        resp = post_validate(url, payload, user, pwd, args.timeout)
-    except requests.RequestException as e:
-        raise SystemExit(f"Request failed: {e}")
+        obj = json.loads(raw)
+    except json.JSONDecodeError as e:
+        raise SystemExit(f"ERROR: Invalid JSON in {args.payload_file}: {e}")
 
-    # 3) show status (+headers if verbose)
-    print(f"HTTP {resp.status_code}")
-    if args.verbose:
-        for k, v in resp.headers.items():
-            print(f"{k}: {v}")
+    model = load_dcrmodel(obj)
+    errors = validate_dcrmodel(model)
 
-    # 4) interpret common outcomes
-    body_text = resp.text or ""
-    if resp.status_code in (200, 204):
-        if not body_text.strip():
-            print("✅ VALID")
-        else:
-            # Sometimes servers return a minimal message; show it
-            print(body_text)
+    if errors:
+        print("❌ INVALID DCR JSON")
+        for e in errors:
+            print(" -", e)
+        sys.exit(1)
+    else:
+        title = model.get("title") or "Untitled"
+        print(f"✅ VALID DCR JSON for model: {title}")
         sys.exit(0)
 
-    # If not 2xx, try to show JSON errors nicely
-    try:
-        err = resp.json()
-        print(json.dumps(err, indent=2, ensure_ascii=False))
-    except ValueError:
-        print(body_text if body_text else "<no body>")
-
-    # Suggestive hints for typical failures
-    if resp.status_code == 400:
-        print("❌ Validation failed (400). Check your JSON against the expected schema.")
-    elif resp.status_code == 415:
-        print("❌ Unsupported media type (415). Ensure Content-Type is application/json.")
-    elif resp.status_code in (401, 403):
-        print("❌ Auth issue despite probe; re-check credentials/permissions.")
-
-    sys.exit(1)
 
 if __name__ == "__main__":
     main()
