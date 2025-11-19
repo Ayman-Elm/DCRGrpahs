@@ -1,0 +1,92 @@
+{
+  "DCRModel": [
+    {
+      "title": "IKT Digitaliseringsstyrelsens Regeltingsproces",
+      "description": "Process for drafting, revising, approving, implementing, and following up on regulations by IKT Digitaliseringsstyrelsen",
+      "type": "DCRModel",
+      "roles": [],
+      "events": [
+        {
+          "id": "draft_regulation",
+          "label": "Udarbejde udkast til ny regel"
+        },
+        {
+          "id": "gather_input",
+          "label": "Indhente input fra interessenter"
+        },
+        {
+          "id": "revise_draft",
+          "label": "Revidere udkastet"
+        },
+        {
+          "id": "approve_draft",
+          "label": "Godkende regeludkast"
+        },
+        {
+          "id": "implement_regulation",
+          "label": "Implementere regel"
+        },
+        {
+          "id": "follow_up_impact",
+          "label": "Følge op på regelens effekt"
+        }
+      ],
+      "rules": [
+        {
+          "type": "condition",
+          "source": "draft_regulation",
+          "target": "gather_input",
+          "description": "Gathering input requires drafting the regulation first"
+        },
+        {
+          "type": "condition",
+          "source": "gather_input",
+          "target": "revise_draft",
+          "description": "Revising draft requires gathering input first"
+        },
+        {
+          "type": "condition",
+          "source": "revise_draft",
+          "target": "approve_draft",
+          "description": "Approving draft requires revising the draft first"
+        },
+        {
+          "type": "condition",
+          "source": "approve_draft",
+          "target": "implement_regulation",
+          "description": "Implementing requires the draft to be approved first"
+        },
+        {
+          "type": "condition",
+          "source": "implement_regulation",
+          "target": "follow_up_impact",
+          "description": "Following up requires implementing regulation first"
+        },
+        {
+          "type": "response",
+          "source": "revise_draft",
+          "target": "approve_draft",
+          "description": "If draft is revised, approving the draft must eventually happen"
+        },
+        {
+          "type": "response",
+          "source": "approve_draft",
+          "target": "implement_regulation",
+          "description": "If draft is approved, regulation must eventually be implemented"
+        }
+      ],
+      "marking": {
+        "executed": [],
+        "included": [
+          "draft_regulation",
+          "gather_input",
+          "revise_draft",
+          "approve_draft",
+          "implement_regulation",
+          "follow_up_impact"
+        ],
+        "pending": []
+      }
+    }
+  ]
+}
