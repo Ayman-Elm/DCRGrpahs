@@ -4,7 +4,9 @@
 # Pipeline:
 # - Get raw text (law/rules/description) from CLI or interactive input.
 # - (Optional) Preprocess into a structured SPEC via LLM.
-# - Generate DCR JSON via LLM in a self-repair loop using dcr_validate.py.
+# - Generate DCR JSON via LLM in a self-repair loop using:
+#       * structural validator (dcr_validate.py)
+#       * semantic critic LLM that checks faithfulness to the spec/law
 # - Wrap into DCR Import format: {"DCRModel":[{...}]}.
 # - Evaluate each run with prompt metrics and append to a JSONL log.
 
@@ -105,6 +107,46 @@ Do NOT output JSON. Just the structured text in this format.
 """.strip()
 
 
+# NEW: semantic critic system prompt
+SYSTEM_PROMPT_CRITIC = """
+You are a critical reviewer of Dynamic Condition Response (DCR) Graphs.
+
+You will be given:
+- A structured SPEC describing a process (primary source of truth).
+- The original raw text (law/form/regulation) as secondary context.
+- A candidate DCR model in JSON form (title, description, events, rules).
+
+Your job is to CHECK WHETHER the candidate DCR model is a faithful and reasonably complete
+representation of the SPEC. Focus on control-flow and behavioural constraints, not on exact wording.
+
+You MUST output a single JSON object with this structure:
+
+{
+  "is_faithful": true | false,
+  "issues": [
+    {
+      "severity": "critical" | "minor",
+      "category": "missing_event" | "missing_constraint" | "wrong_constraint" | "over_modeling" | "other",
+      "description": "short explanation of the issue in natural language",
+      "suggested_fix": "short suggestion for how to fix the DCR model"
+    }
+  ],
+  "summary": "short overall assessment (1-3 sentences)"
+}
+
+Guidelines:
+- Set "is_faithful": true ONLY if the DCR graph covers all the major phases and constraints
+  described in the SPEC, and you have NO critical issues.
+- Treat missing major steps, wrong ordering, or missing key obligations (e.g. deadlines, mandatory
+  responses, enabling conditions) as CRITICAL.
+- Minor naming differences or extra non-harmful events can be MINOR issues.
+- If in doubt, choose a conservative stance and set "is_faithful": false and explain what is missing
+  or wrong.
+
+Output ONLY the JSON object. No explanations, no markdown.
+""".strip()
+
+
 # ---------------------------------------------------------------------
 # LLM helper functions
 # ---------------------------------------------------------------------
@@ -157,23 +199,102 @@ def call_dcr_generator(messages: List[Dict[str, str]], model_name: str) -> str:
     return resp.choices[0].message.content
 
 
+def call_dcr_critic(
+    structured_spec: str,
+    original_text: str,
+    candidate_json: str,
+    model_name: str,
+    verbose: bool = True,
+) -> Dict[str, Any]:
+    """
+    Ask the LLM to act as a semantic critic of the candidate DCR model.
+    Returns a dict with keys:
+      - is_faithful: bool
+      - issues: list[dict]
+      - summary: str
+    """
+    if verbose:
+        print("\n=== Running semantic critic on candidate DCR model ===")
+
+    critic_messages = [
+        {"role": "system", "content": SYSTEM_PROMPT_CRITIC},
+        {
+            "role": "user",
+            "content": (
+                "You are given the following inputs.\n\n"
+                "STRUCTURED SPEC (primary source of truth):\n"
+                f"{structured_spec}\n\n"
+                "ORIGINAL RAW TEXT (secondary context):\n"
+                f"{original_text}\n\n"
+                "CANDIDATE DCR MODEL (JSON):\n"
+                f"{candidate_json}\n\n"
+                "Please evaluate whether this DCR model faithfully and sufficiently captures "
+                "the process and constraints described in the SPEC. Output ONLY the JSON verdict "
+                "described in the system prompt."
+            ),
+        },
+    ]
+
+    resp = client.chat.completions.create(
+        model=model_name,
+        messages=critic_messages,
+        response_format={"type": "json_object"},
+    )
+
+    content = resp.choices[0].message.content
+    try:
+        critic_obj = json.loads(content)
+    except json.JSONDecodeError:
+        # If critic somehow fails JSON, treat as not faithful with a generic issue.
+        critic_obj = {
+            "is_faithful": False,
+            "issues": [
+                {
+                    "severity": "critical",
+                    "category": "other",
+                    "description": "Critic output was not valid JSON; cannot confirm faithfulness.",
+                    "suggested_fix": "Re-run generation with clearer constraints and re-evaluate."
+                }
+            ],
+            "summary": "Critic failed to produce valid JSON verdict."
+        }
+
+    if verbose:
+        print("\n=== Semantic critic verdict ===")
+        print(json.dumps(critic_obj, indent=2, ensure_ascii=False))
+        print("================================")
+
+    # Ensure minimal keys
+    critic_obj.setdefault("is_faithful", False)
+    critic_obj.setdefault("issues", [])
+    critic_obj.setdefault("summary", "")
+
+    return critic_obj
+
+
 def generate_dcr_graph(
     structured_spec: str,
     original_text: str,
     model_name: str,
-    max_retries: int = 5,
+    max_retries: int = 10,
     verbose: bool = True,
 ) -> Tuple[Dict[str, Any], Dict[str, Any]]:
     """
     Main loop:
     1) Ask model for JSON using the structured spec + original text.
-    2) Run symbolic validation.
-    3) If errors, re-prompt with error messages and ask for a corrected graph.
+    2) Run structural validation (validate_raw_json).
+    3) If structural errors, re-prompt with error messages.
+    4) If structurally valid, run semantic critic:
+         - If is_faithful == true -> accept.
+         - Else -> treat critic issues as "semantic errors" and re-prompt with them.
+    5) Repeat up to max_retries.
 
     Returns:
       (model_dict, stats_dict) where stats_dict contains:
         - num_attempts
         - num_validation_failures
+        - num_semantic_failures
+        - critic_last_is_faithful
     """
 
     combined_description = (
@@ -191,6 +312,8 @@ def generate_dcr_graph(
     last_json: str | None = None
     num_attempts = 0
     num_validation_failures = 0
+    num_semantic_failures = 0
+    critic_last_is_faithful = False
 
     for attempt in range(1, max_retries + 1):
         num_attempts = attempt
@@ -201,59 +324,111 @@ def generate_dcr_graph(
         raw_json = call_dcr_generator(messages, model_name=model_name)
         last_json = raw_json
 
-        # Try validation
+        # --- 1) STRUCTURAL VALIDATION ---
         try:
-            model_obj, errors = validate_raw_json(raw_json)
+            model_obj, struct_errors = validate_raw_json(raw_json)
         except json.JSONDecodeError as e:
-            errors = [f"Model output was not valid JSON: {e}"]
+            struct_errors = [f"Model output was not valid JSON: {e}"]
             model_obj = None
         except SystemExit as e:
             # load_dcrmodel may call SystemExit on structural problems
-            errors = [f"Structural error while loading DCRModel: {e}"]
+            struct_errors = [f"Structural error while loading DCRModel: {e}"]
             model_obj = None
 
-        if errors:
+        if struct_errors:
             num_validation_failures += 1
 
-        if not errors and model_obj is not None:
+        # If structural errors, we do NOT run the critic yet.
+        if struct_errors or model_obj is None:
             if verbose:
-                print("Validation passed ✅")
+                print("Structural validation errors:")
+                print("\n".join(f"- {err}" for err in struct_errors))
+
+            error_text = "\n".join(f"- {err}" for err in struct_errors)
+
+            messages.append({"role": "assistant", "content": raw_json})
+            messages.append(
+                {
+                    "role": "user",
+                    "content": (
+                        "Your previous JSON DCR graph failed STRUCTURAL validation with the "
+                        "following problems:\n"
+                        f"{error_text}\n\n"
+                        "Please output a FULLY CORRECTED JSON object that fixes ALL of these "
+                        "structural issues. Output ONLY the JSON, no comments."
+                    ),
+                }
+            )
+            continue  # next attempt
+
+        # --- 2) SEMANTIC CRITIC ---
+        critic_obj = call_dcr_critic(
+            structured_spec=structured_spec,
+            original_text=original_text,
+            candidate_json=raw_json,
+            model_name=model_name,
+            verbose=verbose,
+        )
+        critic_last_is_faithful = bool(critic_obj.get("is_faithful", False))
+
+        if critic_last_is_faithful:
+            if verbose:
+                print("Semantic critic accepted the model as faithful ✅")
             stats = {
                 "num_attempts": num_attempts,
                 "num_validation_failures": num_validation_failures,
+                "num_semantic_failures": num_semantic_failures,
+                "critic_last_is_faithful": critic_last_is_faithful,
             }
             return model_obj, stats
 
-        # If we reach here, there were errors.
-        error_text = "\n".join(f"- {err}" for err in errors)
+        # If we reach here, critic says NOT faithful.
+        num_semantic_failures += 1
+        issues = critic_obj.get("issues", [])
+        summary = critic_obj.get("summary", "")
+
+        issue_lines = []
+        for idx, issue in enumerate(issues):
+            sev = issue.get("severity", "unknown")
+            cat = issue.get("category", "other")
+            desc = issue.get("description", "")
+            sugg = issue.get("suggested_fix", "")
+            line = f"- [{sev}/{cat}] {desc}"
+            if sugg:
+                line += f" | Suggested fix: {sugg}"
+            issue_lines.append(line)
+
+        if not issue_lines:
+            issue_lines.append("- [critical/other] Critic reports the model is not faithful, but did not specify issues.")
+
+        error_text = (
+            "Semantic critic judged your previous DCR model as NOT faithful to the SPEC.\n"
+            f"Summary: {summary}\n"
+            "List of issues:\n" + "\n".join(issue_lines)
+        )
+
         if verbose:
-            print("Validation errors:")
+            print("Semantic critic issues:")
             print(error_text)
 
-        # Append previous JSON as assistant content, then ask to fix it
-        messages.append(
-            {
-                "role": "assistant",
-                "content": raw_json,
-            }
-        )
+        messages.append({"role": "assistant", "content": raw_json})
         messages.append(
             {
                 "role": "user",
                 "content": (
-                    "Your previous JSON DCR graph failed validation with the "
-                    "following problems:\n"
+                    "Your previous JSON DCR graph failed SEMANTIC review. The issues are:\n"
                     f"{error_text}\n\n"
-                    "Please output a FULLY CORRECTED JSON object that fixes "
-                    "ALL of these issues. Output ONLY the JSON, no comments."
+                    "Please output a FULLY CORRECTED JSON object that fixes ALL of these semantic "
+                    "issues while still respecting the structured SPEC and original text. "
+                    "Output ONLY the JSON, no comments."
                 ),
             }
         )
 
-    # If we still don't have a valid graph after max_retries:
+    # If we still don't have a faithful model after max_retries:
     raise RuntimeError(
-        f"Failed to produce a valid DCR graph after {max_retries} attempts.\n"
-        f"Last JSON from model was:\n{last_json}"
+        f"Failed to produce a structurally valid AND semantically faithful DCR graph "
+        f"after {max_retries} attempts.\nLast JSON from model was:\n{last_json}"
     )
 
 
@@ -549,6 +724,8 @@ def main() -> None:
 
     num_attempts = gen_stats["num_attempts"]
     num_validation_failures = gen_stats["num_validation_failures"]
+    num_semantic_failures = gen_stats.get("num_semantic_failures", 0)
+    critic_last_is_faithful = gen_stats.get("critic_last_is_faithful", False)
 
     # 4) Sanitize events and rules
     events = dcr_model.get("events", [])
@@ -601,7 +778,7 @@ def main() -> None:
 
     # 7) Compute metrics
     total_time = time.time() - start_time
-    one_shot = (num_attempts == 1 and num_validation_failures == 0)
+    one_shot = (num_attempts == 1 and num_validation_failures == 0 and num_semantic_failures == 0)
 
     difficulty_score = estimate_difficulty_score(
         raw_prompt_words=raw_words,
@@ -628,6 +805,8 @@ def main() -> None:
 
         "num_generation_attempts": num_attempts,
         "num_validation_failures": num_validation_failures,
+        "num_semantic_failures": num_semantic_failures,
+        "critic_last_is_faithful": critic_last_is_faithful,
         "one_shot_success": one_shot,
         "total_time_seconds": total_time,
 
@@ -649,6 +828,8 @@ def main() -> None:
     print(f"Structured SPEC:        {struct_words} words ({struct_chars} chars)")
     print(f"Attempts:               {num_attempts}")
     print(f"Validation failures:    {num_validation_failures}")
+    print(f"Semantic failures:      {num_semantic_failures}")
+    print(f"Critic is_faithful:     {critic_last_is_faithful}")
     print(f"One-shot success:       {one_shot}")
     print(f"Total time:             {total_time:.2f} s")
     print(f"Difficulty score:       {difficulty_score:.2f} / 10")

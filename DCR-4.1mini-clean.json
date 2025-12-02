@@ -1,0 +1,217 @@
+{
+  "DCRModel": [
+    {
+      "title": "Jobcenter Offer (AB 101) Process",
+      "description": "Process for creating, sending, receiving, accepting, managing and ending a Jobcenter offer (AB 101) for a citizen, including complaint handling and reporting.",
+      "type": "DCRModel",
+      "roles": [],
+      "events": [
+        {
+          "id": "JOBCENTER_CREATE_OFFER",
+          "label": "Jobcenter creates offer"
+        },
+        {
+          "id": "JOBCENTER_SEND_OFFER_TO_CITIZEN",
+          "label": "Jobcenter sends offer to citizen"
+        },
+        {
+          "id": "CITIZEN_RECEIVE_OFFER",
+          "label": "Citizen receives offer"
+        },
+        {
+          "id": "CITIZEN_START_OFFER",
+          "label": "Citizen starts offer"
+        },
+        {
+          "id": "CITIZEN_REPORT_SICKNESS",
+          "label": "Citizen reports sickness"
+        },
+        {
+          "id": "CITIZEN_REQUEST_HOLIDAY",
+          "label": "Citizen requests holiday"
+        },
+        {
+          "id": "CITIZEN_SIGN_CONFIRMATION",
+          "label": "Citizen signs confirmation"
+        },
+        {
+          "id": "CITIZEN_RETURN_CONFIRMATION",
+          "label": "Citizen returns signed confirmation"
+        },
+        {
+          "id": "OPTIONAL_CREATE_INDIVIDUAL_AGREEMENT",
+          "label": "Optional creation of individual agreement"
+        },
+        {
+          "id": "CITIZEN_SIGN_INDIVIDUAL_AGREEMENT",
+          "label": "Citizen signs individual agreement"
+        },
+        {
+          "id": "OFFERPLACE_REPORT_ABSENCE_OR_END",
+          "label": "Offer place reports absence or premature end"
+        },
+        {
+          "id": "CITIZEN_FILE_COMPLAINT",
+          "label": "Citizen files complaint"
+        },
+        {
+          "id": "JOBCENTER_FORWARD_COMPLAINT",
+          "label": "Jobcenter forwards complaint to Ankestyrelsen"
+        },
+        {
+          "id": "OFFER_ENDS_NORMALLY",
+          "label": "Offer ends normally"
+        }
+      ],
+      "rules": [
+        {
+          "type": "condition",
+          "source": "JOBCENTER_CREATE_OFFER",
+          "target": "JOBCENTER_SEND_OFFER_TO_CITIZEN",
+          "description": "Offer must be created before it can be sent"
+        },
+        {
+          "type": "condition",
+          "source": "JOBCENTER_SEND_OFFER_TO_CITIZEN",
+          "target": "CITIZEN_RECEIVE_OFFER",
+          "description": "Offer must be sent before citizen can receive it"
+        },
+        {
+          "type": "condition",
+          "source": "CITIZEN_RECEIVE_OFFER",
+          "target": "CITIZEN_START_OFFER",
+          "description": "Citizen can start offer only after receiving it"
+        },
+        {
+          "type": "response",
+          "source": "CITIZEN_RETURN_CONFIRMATION",
+          "target": "JOBCENTER_CREATE_OFFER",
+          "description": "Returning signed confirmation formalizes acceptance"
+        },
+        {
+          "type": "condition",
+          "source": "JOBCENTER_CREATE_OFFER",
+          "target": "OPTIONAL_CREATE_INDIVIDUAL_AGREEMENT",
+          "description": "Individual agreement can be created only after basic offer"
+        },
+        {
+          "type": "condition",
+          "source": "OPTIONAL_CREATE_INDIVIDUAL_AGREEMENT",
+          "target": "CITIZEN_SIGN_INDIVIDUAL_AGREEMENT",
+          "description": "Citizen can sign individual agreement only after it is created"
+        },
+        {
+          "type": "condition",
+          "source": "CITIZEN_START_OFFER",
+          "target": "OPTIONAL_CREATE_INDIVIDUAL_AGREEMENT",
+          "description": "Individual agreement creation happens before or soon after offer start"
+        },
+        {
+          "type": "response",
+          "source": "CITIZEN_RECEIVE_OFFER",
+          "target": "CITIZEN_FILE_COMPLAINT",
+          "description": "Complaint can be filed only after offer is received",
+          "duration": "P28D"
+        },
+        {
+          "type": "condition",
+          "source": "CITIZEN_RECEIVE_OFFER",
+          "target": "CITIZEN_FILE_COMPLAINT",
+          "description": "Complaint must be filed within 4 weeks after receiving offer"
+        },
+        {
+          "type": "condition",
+          "source": "CITIZEN_FILE_COMPLAINT",
+          "target": "JOBCENTER_FORWARD_COMPLAINT",
+          "description": "Complaint is forwarded only if jobcenter maintains its decision"
+        },
+        {
+          "type": "condition",
+          "source": "CITIZEN_RECEIVE_OFFER",
+          "target": "CITIZEN_SIGN_CONFIRMATION",
+          "description": "Citizen signs confirmation after receiving offer"
+        },
+        {
+          "type": "condition",
+          "source": "CITIZEN_SIGN_CONFIRMATION",
+          "target": "CITIZEN_RETURN_CONFIRMATION",
+          "description": "Citizen returns confirmation after signing"
+        },
+        {
+          "type": "response",
+          "source": "CITIZEN_REPORT_SICKNESS",
+          "target": "CITIZEN_REPORT_SICKNESS",
+          "description": "Citizen must immediately report sickness"
+        },
+        {
+          "type": "milestone",
+          "source": "CITIZEN_START_OFFER",
+          "target": "CITIZEN_REQUEST_HOLIDAY",
+          "description": "Holiday request can only occur during the active offer"
+        },
+        {
+          "type": "response",
+          "source": "CITIZEN_REQUEST_HOLIDAY",
+          "target": "CITIZEN_REQUEST_HOLIDAY",
+          "description": "Holiday must be agreed upon"
+        },
+        {
+          "type": "response",
+          "source": "JOBCENTER_CREATE_OFFER",
+          "target": "OFFER_ENDS_NORMALLY",
+          "description": "Offer eventually ends normally"
+        },
+        {
+          "type": "exclude",
+          "source": "OFFER_ENDS_NORMALLY",
+          "target": "CITIZEN_REPORT_SICKNESS",
+          "description": "Citizen is exempt from availability obligation after offer ends"
+        },
+        {
+          "type": "include",
+          "source": "JOBCENTER_CREATE_OFFER",
+          "target": "CITIZEN_REPORT_SICKNESS",
+          "description": "Citizen must report sickness during active offer"
+        },
+        {
+          "type": "include",
+          "source": "JOBCENTER_CREATE_OFFER",
+          "target": "CITIZEN_REQUEST_HOLIDAY",
+          "description": "Citizen can request holiday during active offer"
+        },
+        {
+          "type": "response",
+          "source": "OFFERPLACE_REPORT_ABSENCE_OR_END",
+          "target": "OFFERPLACE_REPORT_ABSENCE_OR_END",
+          "description": "Offer place reports absence or premature end when applicable"
+        },
+        {
+          "type": "condition",
+          "source": "OFFERPLACE_REPORT_ABSENCE_OR_END",
+          "target": "OFFER_ENDS_NORMALLY",
+          "description": "Offer may end normally after absence or premature end"
+        }
+      ],
+      "marking": {
+        "executed": [],
+        "included": [
+          "JOBCENTER_CREATE_OFFER",
+          "JOBCENTER_SEND_OFFER_TO_CITIZEN",
+          "CITIZEN_RECEIVE_OFFER",
+          "CITIZEN_START_OFFER",
+          "CITIZEN_REPORT_SICKNESS",
+          "CITIZEN_REQUEST_HOLIDAY",
+          "CITIZEN_SIGN_CONFIRMATION",
+          "CITIZEN_RETURN_CONFIRMATION",
+          "OPTIONAL_CREATE_INDIVIDUAL_AGREEMENT",
+          "CITIZEN_SIGN_INDIVIDUAL_AGREEMENT",
+          "OFFERPLACE_REPORT_ABSENCE_OR_END",
+          "CITIZEN_FILE_COMPLAINT",
+          "JOBCENTER_FORWARD_COMPLAINT",
+          "OFFER_ENDS_NORMALLY"
+        ],
+        "pending": []
+      }
+    }
+  ]
+}
