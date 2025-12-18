@@ -276,7 +276,7 @@ def generate_dcr_graph(
     structured_spec: str,
     original_text: str,
     model_name: str,
-    max_retries: int = 10,
+    max_retries: int = 15,
     verbose: bool = True,
 ) -> Tuple[Dict[str, Any], Dict[str, Any]]:
     """
@@ -654,7 +654,7 @@ def parse_args() -> argparse.Namespace:
     ap.add_argument(
         "--max-retries",
         type=int,
-        default=5,
+        default=15,
         help="Maximum number of LLM repair attempts (default: 5).",
     )
     ap.add_argument(

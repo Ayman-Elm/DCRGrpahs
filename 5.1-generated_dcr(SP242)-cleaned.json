@@ -1,0 +1,1098 @@
+{
+  "DCRModel": [
+    {
+      "title": "Udvidet helbredstillæg – tandproteser, briller og fodbehandling",
+      "description": "Ansøgning, vurdering, bevilling, udbetaling og kontrol af udvidet helbredstillæg og evt. personligt tillæg til tandproteser, briller og fodbehandling.",
+      "type": "DCRModel",
+      "roles": [],
+      "events": [
+        {
+          "id": "A1_digital_valgt",
+          "label": "Ansøger vælger digital ansøgningskanal"
+        },
+        {
+          "id": "A1_papir_valgt",
+          "label": "Ansøger vælger papir-ansøgningskanal"
+        },
+        {
+          "id": "G1_digital_fritagelse",
+          "label": "Ansøger er fritaget for digital selvbetjening"
+        },
+        {
+          "id": "A2_ansogning_digital",
+          "label": "Ansøger indsender digital ansøgning om udvidet helbredstillæg til kommunen"
+        },
+        {
+          "id": "A2_ansogning_papir",
+          "label": "Ansøger indsender papiransøgning om udvidet helbredstillæg til kommunen"
+        },
+        {
+          "id": "A3_formueopg_digital",
+          "label": "Ansøger indsender digital formueopgørelse til Udbetaling Danmark"
+        },
+        {
+          "id": "A3_formueopg_papir",
+          "label": "Ansøger indsender papir-formueopgørelse til Udbetaling Danmark"
+        },
+        {
+          "id": "A4_samtykke_behandler",
+          "label": "Ansøger afgiver samtykke til kommunens kontakt til konkret behandler"
+        },
+        {
+          "id": "A4a_kontakt_konkret_behandler",
+          "label": "Kommune kontakter konkret behandler for faglig afklaring"
+        },
+        {
+          "id": "A5_okonomi_ovr_oplys",
+          "label": "Kommune indhenter økonomiske og øvrige saglige oplysninger"
+        },
+        {
+          "id": "A6_opgor_formue",
+          "label": "Udbetaling Danmark opgør likvid formue"
+        },
+        {
+          "id": "A7_formue_til_kommune",
+          "label": "Udbetaling Danmark sender formueoplysning til kommunen"
+        },
+        {
+          "id": "A8_vurder_nodvendig_udgift_ja",
+          "label": "Kommune vurderer, at udgiften er nødvendig og betingelserne er opfyldt"
+        },
+        {
+          "id": "A8_vurder_nodvendig_udgift_nej",
+          "label": "Kommune vurderer, at udgiften ikke er nødvendig eller betingelserne ikke er opfyldt"
+        },
+        {
+          "id": "A9_vurd_sarlig_okonomi",
+          "label": "Kommune vurderer om der foreligger særlig vanskelig økonomisk situation"
+        },
+        {
+          "id": "A11_bevilling_helbredstillæg",
+          "label": "Kommune træffer bevilling af udvidet helbredstillæg"
+        },
+        {
+          "id": "A11_afslag_helbredstillæg",
+          "label": "Kommune træffer afslag på udvidet helbredstillæg"
+        },
+        {
+          "id": "A12_meddelelse_ansoger",
+          "label": "Kommune meddeler afgørelse til ansøger"
+        },
+        {
+          "id": "A13_info_behandler",
+          "label": "Kommune informerer evt. behandler om tilskuddets størrelse"
+        },
+        {
+          "id": "A14_pabegynd_behandling",
+          "label": "Ansøger påbegynder behandling"
+        },
+        {
+          "id": "A15_generelt_tilbud_virk",
+          "label": "Behandler indsender tilbud/overslag/ansøgning via digital løsning på virk.dk (generelt)"
+        },
+        {
+          "id": "A16_prisaftale_leverandor",
+          "label": "Kommune indgår eller anvender eksisterende prisaftale med leverandør"
+        },
+        {
+          "id": "A17_beregn_personligt_tillaeg_egenandel",
+          "label": "Kommune beregner personligt tillæg til dækning af egenandelen/øvrige nødvendige udgifter"
+        },
+        {
+          "id": "A18_udbetaling_tillaeg",
+          "label": "Kommune udbetaler helbredstillæg og evt. personligt tillæg"
+        },
+        {
+          "id": "A18a_faktisk_valg_og_faktura",
+          "label": "Behandling gennemføres og faktisk løsning/faktura foreligger"
+        },
+        {
+          "id": "A19_efterfolgende_kontrol",
+          "label": "Kommune og Udbetaling Danmark foretager efterfølgende kontrol og datakørsler"
+        },
+        {
+          "id": "A20_dataenhed_videref",
+          "label": "Udbetaling Danmarks dataenhed videreformidler formodede fejl/urigtige data til kommunen"
+        },
+        {
+          "id": "A21_regulering_tilbagekrav",
+          "label": "Kommune regulerer ydelse/tilskud eller rejser krav om tilbagebetaling"
+        },
+        {
+          "id": "E1_relevant_aendring",
+          "label": "Relevant ændring i indkomst, formue eller personlige forhold opstår"
+        },
+        {
+          "id": "A22_ansoger_melder_aendring",
+          "label": "Ansøger indberetter ændringer i indkomst, formue og personlige forhold til Udbetaling Danmark"
+        },
+        {
+          "id": "A23_slet_arkiver",
+          "label": "Kommune sletter/arkiverer oplysninger efter reglerne"
+        },
+        {
+          "id": "T1_tandprotese_tilbud",
+          "label": "Behandler udarbejder tilbud på aftagelig tandprotese og indsender via virk.dk"
+        },
+        {
+          "id": "T2_vurd_type_tandprotese",
+          "label": "Kommune vurderer nødvendig type tandprotese (billigste tilstrækkelige aftagelige løsning)"
+        },
+        {
+          "id": "T3_fastlaeg_tandprotese_tilskudsgrundlag",
+          "label": "Kommune fastlægger tilskudsgrundlag for tandprotese inkl. følgeydelser"
+        },
+        {
+          "id": "T4_fast_protese_alternativ",
+          "label": "Kommune håndterer ønske om fast protese (beregner ift. alternativ aftagelig løsning)"
+        },
+        {
+          "id": "T5_personligt_tillaeg_fast_protese",
+          "label": "Kommune vurderer personligt tillæg til merudgift ved fast protese"
+        },
+        {
+          "id": "B1_brille_overslag",
+          "label": "Optiker/øjenlæge udarbejder specificeret brilleoverslag og indsender via virk.dk"
+        },
+        {
+          "id": "B2_vurd_brille_omfattet",
+          "label": "Kommune vurderer om brilleopgaven er omfattet (standardbrille mv.)"
+        },
+        {
+          "id": "B3_udeluk_ikke_tilskud_brille",
+          "label": "Kommune udelukker ikke-tilskudsberettigede brilleudgifter"
+        },
+        {
+          "id": "B4_vurd_saerlige_laeseBriller",
+          "label": "Kommune vurderer særlige læsebriller (styrkeforskel/bygningsfejl ≥ 1 dioptri)"
+        },
+        {
+          "id": "B5_fastlaeg_brille_tilskudsgrundlag",
+          "label": "Kommune fastlægger tilskudsgrundlag ved ønske om kontaktlinser/glidende overgang"
+        },
+        {
+          "id": "F1_fodbehandling_ansogning",
+          "label": "Fodterapeut/fodplejer medunderskriver ansøgning om fodbehandling og indsender via virk.dk"
+        },
+        {
+          "id": "F2_vurd_behov_vedvarende_fodbeh",
+          "label": "Kommune vurderer om der er behov for vedvarende fodbehandling"
+        },
+        {
+          "id": "F3_vurd_funktionsnedsattelse",
+          "label": "Kommune vurderer om pensionist har funktionsnedsættelse og behov ud over hjemmeplejen"
+        },
+        {
+          "id": "F4_ikke_dobbeltstoette_sundhedslov",
+          "label": "Kommune sikrer at fodbehandling ikke kan støttes efter sundhedslovens kapitel 15"
+        },
+        {
+          "id": "F5_ikke_dobbeltstoette_servicelov",
+          "label": "Kommune sikrer at fodbehandling ikke kan dækkes efter servicelovens § 83 og ikke kan varetages af borger selv"
+        },
+        {
+          "id": "F6_fastlaeg_fod_tilskudsgrundlag",
+          "label": "Kommune fastlægger tilskudsgrundlag for fodbehandling"
+        },
+        {
+          "id": "H1_opgor_personlig_tillaegsprocent",
+          "label": "Udbetaling Danmark opgør personlig tillægsprocent og stiller den til rådighed for kommunen"
+        },
+        {
+          "id": "H2_kontrol_tillaegsprocent",
+          "label": "Kommune kontrollerer at personlig tillægsprocent > 0"
+        },
+        {
+          "id": "H3_kontrol_formuegraense",
+          "label": "Kommune kontrollerer at likvid formue er under formuegrænsen"
+        },
+        {
+          "id": "H4_fastlaeg_nodvendig_udgift",
+          "label": "Kommune fastlægger nødvendig udgift for den pågældende behandling"
+        },
+        {
+          "id": "H5_vaelg_prisgrundlag",
+          "label": "Kommune anvender prisaftalepris eller faktisk pris til beregning"
+        },
+        {
+          "id": "H6_beregn_helbredstillæg_85pct",
+          "label": "Kommune beregner udvidet helbredstillæg som 85 % af ansøgers egen andel af den nødvendige udgift"
+        },
+        {
+          "id": "H7_vurd_sarlig_okonomi_personligt",
+          "label": "Kommune vurderer, om ansøger er særligt vanskeligt stillet økonomisk, udgiften er nødvendig og rimelig, og ansøger ikke selv kan betale"
+        },
+        {
+          "id": "H8_afgorelse_personligt_tillaeg",
+          "label": "Kommune bevilger/afslår personligt tillæg"
+        },
+        {
+          "id": "K1_indhent_okonomi_ferie",
+          "label": "Kommune indhenter økonomi- og ferieoplysninger fra andre myndigheder mv."
+        },
+        {
+          "id": "K2_sammenstil_okonomi",
+          "label": "Kommune sammenstiller oplysninger fra pengeinstitutter og arbejdsgivere med øvrige økonomiske oplysninger"
+        },
+        {
+          "id": "K3_udveksl_ydelsesoplys",
+          "label": "Kommune og Udbetaling Danmark udveksler ydelsesoplysninger (gensidig oplysningspligt)"
+        },
+        {
+          "id": "K4_dataenhed_samkor",
+          "label": "Udbetaling Danmarks dataenhed sammenkører ydelser og registre for at finde fejl"
+        },
+        {
+          "id": "K5_reguler_helbred_personlig",
+          "label": "Kommune regulerer helbredstillæg/personlige tillæg"
+        },
+        {
+          "id": "K6_tilbagebetalingskrav",
+          "label": "Kommune rejser tilbagebetalingskrav"
+        },
+        {
+          "id": "K7_sanktion_bode",
+          "label": "Kommune vurderer bødesag/indberetning ved bevidst/grov urigtig oplysning"
+        }
+      ],
+      "rules": [
+        {
+          "type": "condition",
+          "source": "A1_digital_valgt",
+          "target": "A2_ansogning_digital",
+          "description": "Digital kanal skal vælges før digital ansøgning"
+        },
+        {
+          "type": "condition",
+          "source": "A1_papir_valgt",
+          "target": "A2_ansogning_papir",
+          "description": "Papirkanal skal vælges før papiransøgning"
+        },
+        {
+          "type": "condition",
+          "source": "A1_digital_valgt",
+          "target": "A3_formueopg_digital",
+          "description": "Digital kanal skal vælges før digital formueopgørelse"
+        },
+        {
+          "type": "condition",
+          "source": "A1_papir_valgt",
+          "target": "A3_formueopg_papir",
+          "description": "Papirkanal skal vælges før papir-formueopgørelse"
+        },
+        {
+          "type": "condition",
+          "source": "G1_digital_fritagelse",
+          "target": "A1_papir_valgt",
+          "description": "Papirkanal må kun vælges, hvis ansøger er fritaget for digital selvbetjening"
+        },
+        {
+          "type": "condition",
+          "source": "A2_ansogning_digital",
+          "target": "A8_vurder_nodvendig_udgift_ja",
+          "description": "Vurdering kræver at ansøgning er modtaget"
+        },
+        {
+          "type": "condition",
+          "source": "A2_ansogning_digital",
+          "target": "A8_vurder_nodvendig_udgift_nej",
+          "description": "Vurdering kræver at ansøgning er modtaget"
+        },
+        {
+          "type": "condition",
+          "source": "A2_ansogning_papir",
+          "target": "A8_vurder_nodvendig_udgift_ja",
+          "description": "Vurdering kræver at ansøgning (papir) er modtaget"
+        },
+        {
+          "type": "condition",
+          "source": "A2_ansogning_papir",
+          "target": "A8_vurder_nodvendig_udgift_nej",
+          "description": "Vurdering kræver at ansøgning (papir) er modtaget"
+        },
+        {
+          "type": "condition",
+          "source": "A3_formueopg_digital",
+          "target": "A6_opgor_formue",
+          "description": "Digital formueopgørelse skal være indsendt før formuen kan opgøres"
+        },
+        {
+          "type": "condition",
+          "source": "A3_formueopg_papir",
+          "target": "A6_opgor_formue",
+          "description": "Papir-formueopgørelse skal være indsendt før formuen kan opgøres"
+        },
+        {
+          "type": "condition",
+          "source": "A6_opgor_formue",
+          "target": "A7_formue_til_kommune",
+          "description": "Formue skal opgøres før den sendes til kommunen"
+        },
+        {
+          "type": "condition",
+          "source": "A3_formueopg_digital",
+          "target": "A8_vurder_nodvendig_udgift_ja",
+          "description": "Vurdering kræver at formueopgørelse er indsendt"
+        },
+        {
+          "type": "condition",
+          "source": "A3_formueopg_digital",
+          "target": "A8_vurder_nodvendig_udgift_nej",
+          "description": "Vurdering kræver at formueopgørelse er indsendt"
+        },
+        {
+          "type": "condition",
+          "source": "A3_formueopg_papir",
+          "target": "A8_vurder_nodvendig_udgift_ja",
+          "description": "Vurdering kræver at formueopgørelse (papir) er indsendt"
+        },
+        {
+          "type": "condition",
+          "source": "A3_formueopg_papir",
+          "target": "A8_vurder_nodvendig_udgift_nej",
+          "description": "Vurdering kræver at formueopgørelse (papir) er indsendt"
+        },
+        {
+          "type": "condition",
+          "source": "A7_formue_til_kommune",
+          "target": "A8_vurder_nodvendig_udgift_ja",
+          "description": "Kommunen skal kende formuen før positiv vurdering"
+        },
+        {
+          "type": "condition",
+          "source": "A7_formue_til_kommune",
+          "target": "A8_vurder_nodvendig_udgift_nej",
+          "description": "Kommunen skal kende formuen før negativ vurdering"
+        },
+        {
+          "type": "response",
+          "source": "A7_formue_til_kommune",
+          "target": "H1_opgor_personlig_tillaegsprocent",
+          "description": "Formueoplysning danner grundlag for opgørelse af personlig tillægsprocent"
+        },
+        {
+          "type": "condition",
+          "source": "H1_opgor_personlig_tillaegsprocent",
+          "target": "H2_kontrol_tillaegsprocent",
+          "description": "Personlig tillægsprocent skal være opgjort før kommunen kan kontrollere den"
+        },
+        {
+          "type": "condition",
+          "source": "A7_formue_til_kommune",
+          "target": "H2_kontrol_tillaegsprocent",
+          "description": "Kontrol af personlig tillægsprocent sker på baggrund af aktuelle oplysninger, herunder formueoplysning"
+        },
+        {
+          "type": "condition",
+          "source": "A7_formue_til_kommune",
+          "target": "H3_kontrol_formuegraense",
+          "description": "Formueoplysning er nødvendig for at kontrollere formuegrænsen"
+        },
+        {
+          "type": "condition",
+          "source": "A7_formue_til_kommune",
+          "target": "H4_fastlaeg_nodvendig_udgift",
+          "description": "Kommunen har adgang til relevante oplysninger før fastlæggelse af nødvendig udgift"
+        },
+        {
+          "type": "condition",
+          "source": "A7_formue_til_kommune",
+          "target": "H5_vaelg_prisgrundlag",
+          "description": "Formueoplysning skal være modtaget før valg af prisgrundlag i beregningen"
+        },
+        {
+          "type": "condition",
+          "source": "H1_opgor_personlig_tillaegsprocent",
+          "target": "H6_beregn_helbredstillæg_85pct",
+          "description": "Beregning skal baseres på opgjort personlig tillægsprocent"
+        },
+        {
+          "type": "condition",
+          "source": "H2_kontrol_tillaegsprocent",
+          "target": "H6_beregn_helbredstillæg_85pct",
+          "description": "Helbredstillæg kan kun beregnes hvis personlig tillægsprocent > 0"
+        },
+        {
+          "type": "condition",
+          "source": "H3_kontrol_formuegraense",
+          "target": "H6_beregn_helbredstillæg_85pct",
+          "description": "Helbredstillæg kan kun beregnes hvis formue er under grænsen"
+        },
+        {
+          "type": "condition",
+          "source": "A7_formue_til_kommune",
+          "target": "H6_beregn_helbredstillæg_85pct",
+          "description": "Beregning af helbredstillæg kræver at formueoplysning er modtaget"
+        },
+        {
+          "type": "condition",
+          "source": "A8_vurder_nodvendig_udgift_ja",
+          "target": "H6_beregn_helbredstillæg_85pct",
+          "description": "Helbredstillæg kan kun beregnes hvis udgiften er vurderet nødvendig"
+        },
+        {
+          "type": "condition",
+          "source": "A2_ansogning_digital",
+          "target": "H4_fastlaeg_nodvendig_udgift",
+          "description": "Fastlæggelse af nødvendig udgift sker i en konkret digital ansøgningssag"
+        },
+        {
+          "type": "condition",
+          "source": "A2_ansogning_papir",
+          "target": "H4_fastlaeg_nodvendig_udgift",
+          "description": "Fastlæggelse af nødvendig udgift sker i en konkret papiransøgningssag"
+        },
+        {
+          "type": "condition",
+          "source": "A2_ansogning_digital",
+          "target": "H5_vaelg_prisgrundlag",
+          "description": "Valg af prisgrundlag sker i en konkret digital sag"
+        },
+        {
+          "type": "condition",
+          "source": "A2_ansogning_papir",
+          "target": "H5_vaelg_prisgrundlag",
+          "description": "Valg af prisgrundlag sker i en konkret papir sag"
+        },
+        {
+          "type": "condition",
+          "source": "A2_ansogning_digital",
+          "target": "H6_beregn_helbredstillæg_85pct",
+          "description": "Beregning af helbredstillæg sker i en konkret digital sag"
+        },
+        {
+          "type": "condition",
+          "source": "A2_ansogning_papir",
+          "target": "H6_beregn_helbredstillæg_85pct",
+          "description": "Beregning af helbredstillæg sker i en konkret papir sag"
+        },
+        {
+          "type": "condition",
+          "source": "H4_fastlaeg_nodvendig_udgift",
+          "target": "H5_vaelg_prisgrundlag",
+          "description": "Valg af prisgrundlag kræver fastlagt nødvendig udgift"
+        },
+        {
+          "type": "condition",
+          "source": "H5_vaelg_prisgrundlag",
+          "target": "H6_beregn_helbredstillæg_85pct",
+          "description": "Beregning af helbredstillæg kræver fastlagt prisgrundlag"
+        },
+        {
+          "type": "condition",
+          "source": "A16_prisaftale_leverandor",
+          "target": "H5_vaelg_prisgrundlag",
+          "description": "Eksisterende prisaftale skal anvendes som prisgrundlag hvis den findes"
+        },
+        {
+          "type": "condition",
+          "source": "H2_kontrol_tillaegsprocent",
+          "target": "A11_bevilling_helbredstillæg",
+          "description": "Bevilling kræver at personlig tillægsprocent er kontrolleret"
+        },
+        {
+          "type": "condition",
+          "source": "H3_kontrol_formuegraense",
+          "target": "A11_bevilling_helbredstillæg",
+          "description": "Bevilling kræver at formuegrænse er kontrolleret"
+        },
+        {
+          "type": "condition",
+          "source": "A7_formue_til_kommune",
+          "target": "A11_bevilling_helbredstillæg",
+          "description": "Bevilling kræver at formueoplysning er modtaget"
+        },
+        {
+          "type": "condition",
+          "source": "A8_vurder_nodvendig_udgift_ja",
+          "target": "A11_bevilling_helbredstillæg",
+          "description": "Bevilling kræver at udgiften er vurderet nødvendig"
+        },
+        {
+          "type": "condition",
+          "source": "A2_ansogning_digital",
+          "target": "A11_bevilling_helbredstillæg",
+          "description": "Bevilling kræver digital ansøgning eller"
+        },
+        {
+          "type": "condition",
+          "source": "A2_ansogning_papir",
+          "target": "A11_bevilling_helbredstillæg",
+          "description": "Bevilling kræver papiransøgning; mindst én ansøgning skal foreligge"
+        },
+        {
+          "type": "condition",
+          "source": "H2_kontrol_tillaegsprocent",
+          "target": "A11_afslag_helbredstillæg",
+          "description": "Afslag kan først træffes når personlig tillægsprocent er kontrolleret"
+        },
+        {
+          "type": "condition",
+          "source": "H3_kontrol_formuegraense",
+          "target": "A11_afslag_helbredstillæg",
+          "description": "Afslag kan først træffes når formuegrænse er kontrolleret"
+        },
+        {
+          "type": "condition",
+          "source": "A7_formue_til_kommune",
+          "target": "A11_afslag_helbredstillæg",
+          "description": "Afslag kan først træffes når formueoplysning er modtaget"
+        },
+        {
+          "type": "condition",
+          "source": "A2_ansogning_digital",
+          "target": "A11_afslag_helbredstillæg",
+          "description": "Afslag kræver digital ansøgning eller"
+        },
+        {
+          "type": "condition",
+          "source": "A2_ansogning_papir",
+          "target": "A11_afslag_helbredstillæg",
+          "description": "Afslag kræver papiransøgning; mindst én ansøgning skal foreligge"
+        },
+        {
+          "type": "condition",
+          "source": "A8_vurder_nodvendig_udgift_nej",
+          "target": "A11_afslag_helbredstillæg",
+          "description": "Hvis udgiften ikke er nødvendig, skal afgørelsen være afslag"
+        },
+        {
+          "type": "response",
+          "source": "H6_beregn_helbredstillæg_85pct",
+          "target": "A11_bevilling_helbredstillæg",
+          "description": "Bevilling forudsætter at helbredstillægget er beregnet"
+        },
+        {
+          "type": "response",
+          "source": "A11_bevilling_helbredstillæg",
+          "target": "A12_meddelelse_ansoger",
+          "description": "Bevilling skal meddeles ansøger"
+        },
+        {
+          "type": "response",
+          "source": "A11_afslag_helbredstillæg",
+          "target": "A12_meddelelse_ansoger",
+          "description": "Afslag skal meddeles ansøger"
+        },
+        {
+          "type": "condition",
+          "source": "A11_bevilling_helbredstillæg",
+          "target": "A12_meddelelse_ansoger",
+          "description": "Meddelelse om bevilling kan kun ske efter bevilling"
+        },
+        {
+          "type": "condition",
+          "source": "A11_afslag_helbredstillæg",
+          "target": "A12_meddelelse_ansoger",
+          "description": "Meddelelse om afslag kan kun ske efter afslag"
+        },
+        {
+          "type": "condition",
+          "source": "A11_bevilling_helbredstillæg",
+          "target": "A14_pabegynd_behandling",
+          "description": "Behandling må ikke påbegyndes før der foreligger bevilling fra kommunen"
+        },
+        {
+          "type": "condition",
+          "source": "A18a_faktisk_valg_og_faktura",
+          "target": "A18_udbetaling_tillaeg",
+          "description": "Udbetaling forudsætter at faktisk løsning og faktura foreligger"
+        },
+        {
+          "type": "condition",
+          "source": "H6_beregn_helbredstillæg_85pct",
+          "target": "A18_udbetaling_tillaeg",
+          "description": "Udbetaling forudsætter beregnet helbredstillæg"
+        },
+        {
+          "type": "condition",
+          "source": "A11_bevilling_helbredstillæg",
+          "target": "A18_udbetaling_tillaeg",
+          "description": "Udbetaling kan kun ske efter bevilling"
+        },
+        {
+          "type": "response",
+          "source": "H8_afgorelse_personligt_tillaeg",
+          "target": "A18_udbetaling_tillaeg",
+          "description": "Bevilling af personligt tillæg medfører udbetaling sammen med helbredstillæg"
+        },
+        {
+          "type": "response",
+          "source": "A18_udbetaling_tillaeg",
+          "target": "A19_efterfolgende_kontrol",
+          "description": "Efter udbetaling kan efterfølgende kontrol iværksættes"
+        },
+        {
+          "type": "response",
+          "source": "K1_indhent_okonomi_ferie",
+          "target": "K2_sammenstil_okonomi",
+          "description": "Indhentede oplysninger sammenstilles"
+        },
+        {
+          "type": "response",
+          "source": "K2_sammenstil_okonomi",
+          "target": "A19_efterfolgende_kontrol",
+          "description": "Sammenstilling indgår i kontrolforløb"
+        },
+        {
+          "type": "response",
+          "source": "K3_udveksl_ydelsesoplys",
+          "target": "A19_efterfolgende_kontrol",
+          "description": "Udvekslede ydelsesoplysninger anvendes i kontrol"
+        },
+        {
+          "type": "response",
+          "source": "K1_indhent_okonomi_ferie",
+          "target": "A5_okonomi_ovr_oplys",
+          "description": "Indhentede økonomi- og ferieoplysninger kan bruges i sagsoplysning før afgørelse"
+        },
+        {
+          "type": "response",
+          "source": "K2_sammenstil_okonomi",
+          "target": "A5_okonomi_ovr_oplys",
+          "description": "Sammenstillede økonomiske oplysninger kan bruges i sagsoplysning før afgørelse"
+        },
+        {
+          "type": "response",
+          "source": "K3_udveksl_ydelsesoplys",
+          "target": "A5_okonomi_ovr_oplys",
+          "description": "Udvekslede ydelsesoplysninger kan bruges i sagsoplysning før afgørelse"
+        },
+        {
+          "type": "response",
+          "source": "A5_okonomi_ovr_oplys",
+          "target": "A8_vurder_nodvendig_udgift_ja",
+          "description": "Indhentede oplysninger anvendes i vurderingen af nødvendig udgift"
+        },
+        {
+          "type": "response",
+          "source": "A5_okonomi_ovr_oplys",
+          "target": "A8_vurder_nodvendig_udgift_nej",
+          "description": "Indhentede oplysninger kan føre til vurdering af at udgiften ikke er nødvendig"
+        },
+        {
+          "type": "condition",
+          "source": "F1_fodbehandling_ansogning",
+          "target": "F2_vurd_behov_vedvarende_fodbeh",
+          "description": "Vurdering af behov for vedvarende fodbehandling kræver ansøgning"
+        },
+        {
+          "type": "condition",
+          "source": "F1_fodbehandling_ansogning",
+          "target": "F3_vurd_funktionsnedsattelse",
+          "description": "Vurdering af funktionsnedsættelse kræver ansøgning"
+        },
+        {
+          "type": "condition",
+          "source": "F1_fodbehandling_ansogning",
+          "target": "F4_ikke_dobbeltstoette_sundhedslov",
+          "description": "Kontrol af støtte efter sundhedslov kræver ansøgning"
+        },
+        {
+          "type": "condition",
+          "source": "F1_fodbehandling_ansogning",
+          "target": "F5_ikke_dobbeltstoette_servicelov",
+          "description": "Kontrol af støtte efter servicelov kræver ansøgning"
+        },
+        {
+          "type": "condition",
+          "source": "F1_fodbehandling_ansogning",
+          "target": "F6_fastlaeg_fod_tilskudsgrundlag",
+          "description": "Tilskudsgrundlag for fodbehandling kræver ansøgning"
+        },
+        {
+          "type": "condition",
+          "source": "F2_vurd_behov_vedvarende_fodbeh",
+          "target": "F6_fastlaeg_fod_tilskudsgrundlag",
+          "description": "Fastlæggelse af fod-tilskudsgrundlag kræver vurdering af vedvarende behov"
+        },
+        {
+          "type": "condition",
+          "source": "F3_vurd_funktionsnedsattelse",
+          "target": "F6_fastlaeg_fod_tilskudsgrundlag",
+          "description": "Fastlæggelse af fod-tilskudsgrundlag kræver vurdering af funktionsnedsættelse"
+        },
+        {
+          "type": "condition",
+          "source": "F4_ikke_dobbeltstoette_sundhedslov",
+          "target": "F6_fastlaeg_fod_tilskudsgrundlag",
+          "description": "Tilskudsgrundlag kræver at ydelsen ikke kan støttes efter sundhedsloven"
+        },
+        {
+          "type": "condition",
+          "source": "F5_ikke_dobbeltstoette_servicelov",
+          "target": "F6_fastlaeg_fod_tilskudsgrundlag",
+          "description": "Tilskudsgrundlag kræver at ydelsen ikke kan dækkes efter servicelovens § 83 og ikke kan varetages af borger selv"
+        },
+        {
+          "type": "response",
+          "source": "F6_fastlaeg_fod_tilskudsgrundlag",
+          "target": "H4_fastlaeg_nodvendig_udgift",
+          "description": "Tilskudsgrundlag for fodbehandling indgår i nødvendig udgift"
+        },
+        {
+          "type": "condition",
+          "source": "F2_vurd_behov_vedvarende_fodbeh",
+          "target": "A11_bevilling_helbredstillæg",
+          "description": "For fodbehandling kræver bevilling, at der er behov for vedvarende fodbehandling"
+        },
+        {
+          "type": "condition",
+          "source": "F3_vurd_funktionsnedsattelse",
+          "target": "A11_bevilling_helbredstillæg",
+          "description": "For fodbehandling kræver bevilling vurdering af funktionsnedsættelse og behov ud over hjemmeplejen"
+        },
+        {
+          "type": "condition",
+          "source": "F4_ikke_dobbeltstoette_sundhedslov",
+          "target": "A11_bevilling_helbredstillæg",
+          "description": "For fodbehandling kræver bevilling at ydelsen ikke kan støttes efter sundhedslovens kapitel 15"
+        },
+        {
+          "type": "condition",
+          "source": "F5_ikke_dobbeltstoette_servicelov",
+          "target": "A11_bevilling_helbredstillæg",
+          "description": "For fodbehandling kræver bevilling at ydelsen ikke kan dækkes efter servicelovens § 83 og ikke kan varetages af borger selv"
+        },
+        {
+          "type": "condition",
+          "source": "F6_fastlaeg_fod_tilskudsgrundlag",
+          "target": "A11_bevilling_helbredstillæg",
+          "description": "For fodbehandling kan bevilling kun ske når tilskudsgrundlag er fastlagt"
+        },
+        {
+          "type": "response",
+          "source": "T1_tandprotese_tilbud",
+          "target": "T2_vurd_type_tandprotese",
+          "description": "Tilbud på tandprotese danner grundlag for vurdering af type"
+        },
+        {
+          "type": "condition",
+          "source": "T1_tandprotese_tilbud",
+          "target": "T2_vurd_type_tandprotese",
+          "description": "Vurdering af type tandprotese kræver at tilbud foreligger"
+        },
+        {
+          "type": "condition",
+          "source": "T1_tandprotese_tilbud",
+          "target": "T3_fastlaeg_tandprotese_tilskudsgrundlag",
+          "description": "Tilskudsgrundlag for tandprotese kræver at tilbud foreligger"
+        },
+        {
+          "type": "condition",
+          "source": "T1_tandprotese_tilbud",
+          "target": "T4_fast_protese_alternativ",
+          "description": "Håndtering af ønske om fast protese kræver at tilbud foreligger"
+        },
+        {
+          "type": "response",
+          "source": "T2_vurd_type_tandprotese",
+          "target": "T3_fastlaeg_tandprotese_tilskudsgrundlag",
+          "description": "Vurdering af type anvendes til at fastlægge tilskudsgrundlag"
+        },
+        {
+          "type": "response",
+          "source": "T3_fastlaeg_tandprotese_tilskudsgrundlag",
+          "target": "H4_fastlaeg_nodvendig_udgift",
+          "description": "Tilskudsgrundlag for tandprotese indgår i nødvendig udgift"
+        },
+        {
+          "type": "response",
+          "source": "T4_fast_protese_alternativ",
+          "target": "T3_fastlaeg_tandprotese_tilskudsgrundlag",
+          "description": "Ved ønske om fast protese fastlægges tilskudsgrundlaget ift. alternativ aftagelig løsning"
+        },
+        {
+          "type": "response",
+          "source": "T5_personligt_tillaeg_fast_protese",
+          "target": "H7_vurd_sarlig_okonomi_personligt",
+          "description": "Merudgift til fast protese indgår i vurdering af personligt tillæg"
+        },
+        {
+          "type": "response",
+          "source": "A15_generelt_tilbud_virk",
+          "target": "T1_tandprotese_tilbud",
+          "description": "Generel digital indsendelse kan være tandprotese-tilbud"
+        },
+        {
+          "type": "response",
+          "source": "A15_generelt_tilbud_virk",
+          "target": "B1_brille_overslag",
+          "description": "Generel digital indsendelse kan være brilleoverslag"
+        },
+        {
+          "type": "response",
+          "source": "A15_generelt_tilbud_virk",
+          "target": "F1_fodbehandling_ansogning",
+          "description": "Generel digital indsendelse kan være fodbehandlingsansøgning"
+        },
+        {
+          "type": "condition",
+          "source": "B1_brille_overslag",
+          "target": "B2_vurd_brille_omfattet",
+          "description": "Vurdering af om brilleopgaven er omfattet kræver overslag"
+        },
+        {
+          "type": "condition",
+          "source": "B1_brille_overslag",
+          "target": "B3_udeluk_ikke_tilskud_brille",
+          "description": "Udelukkelse af ikke-tilskudsberettigede brilleudgifter kræver overslag"
+        },
+        {
+          "type": "condition",
+          "source": "B1_brille_overslag",
+          "target": "B4_vurd_saerlige_laeseBriller",
+          "description": "Vurdering af særlige læsebriller kræver overslag"
+        },
+        {
+          "type": "condition",
+          "source": "B1_brille_overslag",
+          "target": "B5_fastlaeg_brille_tilskudsgrundlag",
+          "description": "Fastlæggelse af brille-tilskudsgrundlag kræver overslag"
+        },
+        {
+          "type": "response",
+          "source": "B2_vurd_brille_omfattet",
+          "target": "H4_fastlaeg_nodvendig_udgift",
+          "description": "Vurdering af om brilleopgaven er omfattet påvirker nødvendig udgift"
+        },
+        {
+          "type": "response",
+          "source": "B3_udeluk_ikke_tilskud_brille",
+          "target": "H4_fastlaeg_nodvendig_udgift",
+          "description": "Udelukkelse af ikke-tilskudsberettigede brilleudgifter påvirker nødvendig udgift"
+        },
+        {
+          "type": "response",
+          "source": "B4_vurd_saerlige_laeseBriller",
+          "target": "H4_fastlaeg_nodvendig_udgift",
+          "description": "Vurdering af særlige læsebriller påvirker nødvendig udgift"
+        },
+        {
+          "type": "response",
+          "source": "B5_fastlaeg_brille_tilskudsgrundlag",
+          "target": "H4_fastlaeg_nodvendig_udgift",
+          "description": "Tilskudsgrundlag for briller indgår i nødvendig udgift"
+        },
+        {
+          "type": "response",
+          "source": "A9_vurd_sarlig_okonomi",
+          "target": "H7_vurd_sarlig_okonomi_personligt",
+          "description": "Generel vurdering af særlig vanskelig økonomi danner grundlag for vurdering af personligt tillæg"
+        },
+        {
+          "type": "condition",
+          "source": "H7_vurd_sarlig_okonomi_personligt",
+          "target": "H8_afgorelse_personligt_tillaeg",
+          "description": "Personligt tillæg kan kun bevilges hvis ansøger er særligt vanskeligt stillet, udgiften er nødvendig og rimelig, og ansøger ikke selv kan betale"
+        },
+        {
+          "type": "condition",
+          "source": "H6_beregn_helbredstillæg_85pct",
+          "target": "A17_beregn_personligt_tillaeg_egenandel",
+          "description": "Beregning af personligt tillæg til egenandelen forudsætter beregnet helbredstillæg"
+        },
+        {
+          "type": "response",
+          "source": "A17_beregn_personligt_tillaeg_egenandel",
+          "target": "H8_afgorelse_personligt_tillaeg",
+          "description": "Beregnet behov for personligt tillæg indgår i afgørelsen om personligt tillæg"
+        },
+        {
+          "type": "response",
+          "source": "A11_bevilling_helbredstillæg",
+          "target": "A13_info_behandler",
+          "description": "Efter bevilling kan kommunen informere behandler om tilskuddets størrelse"
+        },
+        {
+          "type": "response",
+          "source": "K4_dataenhed_samkor",
+          "target": "K5_reguler_helbred_personlig",
+          "description": "Datakørsel kan medføre regulering på baggrund af samkøring"
+        },
+        {
+          "type": "response",
+          "source": "K5_reguler_helbred_personlig",
+          "target": "K6_tilbagebetalingskrav",
+          "description": "Regulering kan føre til tilbagebetalingskrav"
+        },
+        {
+          "type": "response",
+          "source": "K6_tilbagebetalingskrav",
+          "target": "K7_sanktion_bode",
+          "description": "Alvorlige forhold kan føre til bødesag/indberetning"
+        },
+        {
+          "type": "condition",
+          "source": "K5_reguler_helbred_personlig",
+          "target": "A21_regulering_tilbagekrav",
+          "description": "Regulering/tilbagekrav forudsætter konstateret fejl eller ændring"
+        },
+        {
+          "type": "condition",
+          "source": "K6_tilbagebetalingskrav",
+          "target": "A21_regulering_tilbagekrav",
+          "description": "Tilbagebetalingskrav indgår i reguleringsbeslutningen"
+        },
+        {
+          "type": "response",
+          "source": "A21_regulering_tilbagekrav",
+          "target": "A18_udbetaling_tillaeg",
+          "description": "Regulering kan medføre ændret udbetaling"
+        },
+        {
+          "type": "response",
+          "source": "E1_relevant_aendring",
+          "target": "A22_ansoger_melder_aendring",
+          "description": "Ved hver relevant ændring opstår pligt til at indberette ændringen"
+        },
+        {
+          "type": "response",
+          "source": "A22_ansoger_melder_aendring",
+          "target": "A6_opgor_formue",
+          "description": "Ændringsindberetning kan medføre ny opgørelse af formue"
+        },
+        {
+          "type": "response",
+          "source": "A22_ansoger_melder_aendring",
+          "target": "A8_vurder_nodvendig_udgift_ja",
+          "description": "Ændringer kan medføre ny positiv vurdering af berettigelse"
+        },
+        {
+          "type": "response",
+          "source": "A22_ansoger_melder_aendring",
+          "target": "A8_vurder_nodvendig_udgift_nej",
+          "description": "Ændringer kan medføre ny negativ vurdering af berettigelse"
+        },
+        {
+          "type": "response",
+          "source": "A22_ansoger_melder_aendring",
+          "target": "H2_kontrol_tillaegsprocent",
+          "description": "Ændringer kan medføre ny kontrol af tillægsprocent"
+        },
+        {
+          "type": "response",
+          "source": "A22_ansoger_melder_aendring",
+          "target": "H3_kontrol_formuegraense",
+          "description": "Ændringer kan medføre ny kontrol af formuegrænse"
+        },
+        {
+          "type": "response",
+          "source": "A22_ansoger_melder_aendring",
+          "target": "H6_beregn_helbredstillæg_85pct",
+          "description": "Ændringer kan udløse ny beregning af helbredstillæg"
+        },
+        {
+          "type": "response",
+          "source": "A22_ansoger_melder_aendring",
+          "target": "A11_bevilling_helbredstillæg",
+          "description": "Ændringer kan medføre ny bevillingsafgørelse"
+        },
+        {
+          "type": "response",
+          "source": "A22_ansoger_melder_aendring",
+          "target": "A11_afslag_helbredstillæg",
+          "description": "Ændringer kan medføre nyt afslag"
+        },
+        {
+          "type": "response",
+          "source": "A22_ansoger_melder_aendring",
+          "target": "A18_udbetaling_tillaeg",
+          "description": "Ændringer kan medføre reguleret udbetaling"
+        },
+        {
+          "type": "response",
+          "source": "A11_bevilling_helbredstillæg",
+          "target": "E1_relevant_aendring",
+          "description": "Efter bevilling gælder løbende pligt til at reagere på relevante ændringer"
+        },
+        {
+          "type": "condition",
+          "source": "A11_afslag_helbredstillæg",
+          "target": "A23_slet_arkiver",
+          "description": "Sletning/arkivering kan ske efter endelig afslag og afslutning af sag"
+        },
+        {
+          "type": "condition",
+          "source": "A19_efterfolgende_kontrol",
+          "target": "A23_slet_arkiver",
+          "description": "Sletning/arkivering kan ske efter eventuel efterfølgende kontrol"
+        },
+        {
+          "type": "condition",
+          "source": "A4_samtykke_behandler",
+          "target": "A4a_kontakt_konkret_behandler",
+          "description": "Konkret kontakt til behandler kræver ansøgers samtykke"
+        }
+      ],
+      "marking": {
+        "executed": [],
+        "included": [
+          "A1_digital_valgt",
+          "A1_papir_valgt",
+          "G1_digital_fritagelse",
+          "A2_ansogning_digital",
+          "A2_ansogning_papir",
+          "A3_formueopg_digital",
+          "A3_formueopg_papir",
+          "A4_samtykke_behandler",
+          "A4a_kontakt_konkret_behandler",
+          "A5_okonomi_ovr_oplys",
+          "A6_opgor_formue",
+          "A7_formue_til_kommune",
+          "A8_vurder_nodvendig_udgift_ja",
+          "A8_vurder_nodvendig_udgift_nej",
+          "A9_vurd_sarlig_okonomi",
+          "A11_bevilling_helbredstillæg",
+          "A11_afslag_helbredstillæg",
+          "A12_meddelelse_ansoger",
+          "A13_info_behandler",
+          "A14_pabegynd_behandling",
+          "A15_generelt_tilbud_virk",
+          "A16_prisaftale_leverandor",
+          "A17_beregn_personligt_tillaeg_egenandel",
+          "A18_udbetaling_tillaeg",
+          "A18a_faktisk_valg_og_faktura",
+          "A19_efterfolgende_kontrol",
+          "A20_dataenhed_videref",
+          "A21_regulering_tilbagekrav",
+          "E1_relevant_aendring",
+          "A22_ansoger_melder_aendring",
+          "A23_slet_arkiver",
+          "T1_tandprotese_tilbud",
+          "T2_vurd_type_tandprotese",
+          "T3_fastlaeg_tandprotese_tilskudsgrundlag",
+          "T4_fast_protese_alternativ",
+          "T5_personligt_tillaeg_fast_protese",
+          "B1_brille_overslag",
+          "B2_vurd_brille_omfattet",
+          "B3_udeluk_ikke_tilskud_brille",
+          "B4_vurd_saerlige_laeseBriller",
+          "B5_fastlaeg_brille_tilskudsgrundlag",
+          "F1_fodbehandling_ansogning",
+          "F2_vurd_behov_vedvarende_fodbeh",
+          "F3_vurd_funktionsnedsattelse",
+          "F4_ikke_dobbeltstoette_sundhedslov",
+          "F5_ikke_dobbeltstoette_servicelov",
+          "F6_fastlaeg_fod_tilskudsgrundlag",
+          "H1_opgor_personlig_tillaegsprocent",
+          "H2_kontrol_tillaegsprocent",
+          "H3_kontrol_formuegraense",
+          "H4_fastlaeg_nodvendig_udgift",
+          "H5_vaelg_prisgrundlag",
+          "H6_beregn_helbredstillæg_85pct",
+          "H7_vurd_sarlig_okonomi_personligt",
+          "H8_afgorelse_personligt_tillaeg",
+          "K1_indhent_okonomi_ferie",
+          "K2_sammenstil_okonomi",
+          "K3_udveksl_ydelsesoplys",
+          "K4_dataenhed_samkor",
+          "K5_reguler_helbred_personlig",
+          "K6_tilbagebetalingskrav",
+          "K7_sanktion_bode"
+        ],
+        "pending": []
+      }
+    }
+  ]
+}

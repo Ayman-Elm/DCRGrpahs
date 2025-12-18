@@ -1,0 +1,581 @@
+{
+  "DCRModel": [
+    {
+      "title": "Tilbud efter lov om en aktiv beskæftigelsesindsats (tilbudsforløb)",
+      "description": "Proces for etablering, gennemførelse, klage, erstatning og ophør af tilbudsforløb efter lov om en aktiv beskæftigelsesindsats.",
+      "type": "DCRModel",
+      "roles": [],
+      "events": [
+        {
+          "id": "E1",
+          "label": "Jobcenter udsteder tilbud"
+        },
+        {
+          "id": "E2",
+          "label": "Udarbejdelse af skriftlig, individuel aftale (Blad 3)"
+        },
+        {
+          "id": "E3",
+          "label": "Jobcenter sender tilbudsdokument til tilbudsmodtager"
+        },
+        {
+          "id": "E4",
+          "label": "Tilbudsmodtager modtager tilbud"
+        },
+        {
+          "id": "E5",
+          "label": "Tilbudsmodtager underskriver bekræftelse af tilbud (Blad 2)"
+        },
+        {
+          "id": "E6",
+          "label": "Tilbudsmodtager returnerer underskrevet bekræftelse til jobcenter"
+        },
+        {
+          "id": "E7",
+          "label": "Tilbudsmodtager underskriver aftale med tilbudssted (Blad 3)"
+        },
+        {
+          "id": "E8",
+          "label": "Tilbudssted underskriver aftale (Blad 3)"
+        },
+        {
+          "id": "E9",
+          "label": "Jobcenter underskriver aftale (Blad 3)"
+        },
+        {
+          "id": "E10",
+          "label": "Tilbudsforløb påbegyndes (fremmøde første dag)"
+        },
+        {
+          "id": "E11",
+          "label": "Løbende fremmøde hos tilbudsstedet"
+        },
+        {
+          "id": "E11A",
+          "label": "Planlagt fremmøde kan ikke ske pga. sygdom (fraværssituation)"
+        },
+        {
+          "id": "E12",
+          "label": "Tilbudsmodtager meddeler fravær pga. sygdom"
+        },
+        {
+          "id": "E13",
+          "label": "Ferie aftales med angivet kontaktperson"
+        },
+        {
+          "id": "E13A",
+          "label": "Ferie under tilbudsforløbet afholdes"
+        },
+        {
+          "id": "E14",
+          "label": "Tilbudssted meddeler jobcenter om udeblivelse"
+        },
+        {
+          "id": "E14A",
+          "label": "Udeblivelse fra planlagt fremmøde registreres"
+        },
+        {
+          "id": "E15",
+          "label": "Tilbudssted meddeler jobcenter om ophør af tilbud"
+        },
+        {
+          "id": "E16",
+          "label": "Kommunikation mellem jobcenter og tilbudssted (opfølgning mv.)"
+        },
+        {
+          "id": "E17",
+          "label": "Fastlæggelse/ændring af timetal, mødetid, adresse, kontaktperson mv."
+        },
+        {
+          "id": "E18",
+          "label": "Fastlæggelse/ændring af målgruppe og ydelsestype"
+        },
+        {
+          "id": "E19",
+          "label": "Fastlæggelse af evt. godtgørelse og befordringsgodtgørelse"
+        },
+        {
+          "id": "E20",
+          "label": "Virksomhed ansøger jobcenter om hjælpemidler/mentorordning"
+        },
+        {
+          "id": "E21",
+          "label": "Jobcenter træffer afgørelse om hjælpemidler/mentorordning"
+        },
+        {
+          "id": "E21POS",
+          "label": "Positiv afgørelse om hjælpemidler/mentorordning (tilskud bevilges)"
+        },
+        {
+          "id": "E22",
+          "label": "Tilbudsmodtager får kendskab til fortrolige/personlige oplysninger"
+        },
+        {
+          "id": "E23",
+          "label": "Tilbudsmodtager anmoder leder/kontaktperson om afklaring af tavshedspligt"
+        },
+        {
+          "id": "E24",
+          "label": "Tilbudsmodtager undlader at videregive fortrolige oplysninger (overholder tavshedspligt)"
+        },
+        {
+          "id": "E25",
+          "label": "Afgørelse om erstatning ved arbejdsskade eller skade forvoldt af tilbudsmodtager"
+        },
+        {
+          "id": "E25A",
+          "label": "Skade opstår under aktivt tilbudsforløb"
+        },
+        {
+          "id": "E26",
+          "label": "Tilbudsmodtager indgiver klage til jobcenter over tilbuddet"
+        },
+        {
+          "id": "E27",
+          "label": "Jobcenter behandler klage"
+        },
+        {
+          "id": "E28",
+          "label": "Jobcenter giver medhold i klage (ændrer/annullerer tilbud)"
+        },
+        {
+          "id": "E29",
+          "label": "Jobcenter giver ikke medhold og videresender klage til Ankestyrelsen"
+        },
+        {
+          "id": "E30",
+          "label": "Ankestyrelsen træffer afgørelse om klagen"
+        },
+        {
+          "id": "E31",
+          "label": "Tilbudsforløb gennemføres og afsluttes"
+        },
+        {
+          "id": "E32",
+          "label": "Rådighedsforpligtelsen sættes i bero (fritagelse under tilbudsforløb)"
+        },
+        {
+          "id": "E33",
+          "label": "Rådighedsforpligtelsen genaktiveres efter tilbudsforløb"
+        },
+        {
+          "id": "E34",
+          "label": "Tilbudstype fastsat som virksomhedspraktik/nytteindsats"
+        },
+        {
+          "id": "E35",
+          "label": "Arbejdsmiljø- og forskelsbehandlingsregler gælder under forløb (virksomhedspraktik/nytteindsats)"
+        }
+      ],
+      "rules": [
+        {
+          "type": "condition",
+          "source": "E1",
+          "target": "E3",
+          "description": "Tilbud skal være udstedt før det kan sendes til tilbudsmodtager"
+        },
+        {
+          "type": "condition",
+          "source": "E3",
+          "target": "E4",
+          "description": "Tilbudsmodtager kan først modtage tilbud efter det er sendt"
+        },
+        {
+          "type": "condition",
+          "source": "E5",
+          "target": "E6",
+          "description": "Bekræftelse skal være underskrevet før den kan returneres til jobcenter"
+        },
+        {
+          "type": "condition",
+          "source": "E6",
+          "target": "E10",
+          "description": "Jobcenter skal have modtaget underskrevet bekræftelse før tilbudsforløb kan påbegyndes"
+        },
+        {
+          "type": "condition",
+          "source": "E1",
+          "target": "E10",
+          "description": "Gyldigt tilbud skal være udstedt før tilbudsforløb kan påbegyndes"
+        },
+        {
+          "type": "condition",
+          "source": "E3",
+          "target": "E10",
+          "description": "Tilbudsdokument skal være sendt som led i gyldigt tilbud før påbegyndelse"
+        },
+        {
+          "type": "condition",
+          "source": "E4",
+          "target": "E10",
+          "description": "Tilbudsmodtager skal have modtaget tilbuddet før påbegyndelse"
+        },
+        {
+          "type": "condition",
+          "source": "E18",
+          "target": "E19",
+          "description": "Målgruppe og ydelsesgrundlag skal være fastlagt før godtgørelse/befordringsgodtgørelse fastsættes"
+        },
+        {
+          "type": "condition",
+          "source": "E18",
+          "target": "E3",
+          "description": "Målgruppe og ydelsestype fastlægges før udsendelse af tilbud"
+        },
+        {
+          "type": "condition",
+          "source": "E17",
+          "target": "E10",
+          "description": "Oplysninger om timetal, mødetid, adresse mv. skal være fastsat før påbegyndelse"
+        },
+        {
+          "type": "condition",
+          "source": "E1",
+          "target": "E16",
+          "description": "Kommunikation og opfølgning kræver mindst et planlagt tilbud"
+        },
+        {
+          "type": "condition",
+          "source": "E10",
+          "target": "E16",
+          "description": "Kommunikation og opfølgning kan også ske ved aktivt tilbudsforløb"
+        },
+        {
+          "type": "condition",
+          "source": "E2",
+          "target": "E7",
+          "description": "Individuel aftale skal være udarbejdet før tilbudsmodtager kan underskrive"
+        },
+        {
+          "type": "condition",
+          "source": "E2",
+          "target": "E8",
+          "description": "Individuel aftale skal være udarbejdet før tilbudssted kan underskrive"
+        },
+        {
+          "type": "condition",
+          "source": "E2",
+          "target": "E9",
+          "description": "Individuel aftale skal være udarbejdet før jobcenter kan underskrive"
+        },
+        {
+          "type": "condition",
+          "source": "E7",
+          "target": "E10",
+          "description": "Hvis aftale anvendes, skal tilbudsmodtager have underskrevet aftalen før påbegyndelse"
+        },
+        {
+          "type": "condition",
+          "source": "E8",
+          "target": "E10",
+          "description": "Hvis aftale anvendes, skal tilbudssted have underskrevet aftalen før påbegyndelse"
+        },
+        {
+          "type": "condition",
+          "source": "E9",
+          "target": "E10",
+          "description": "Hvis aftale anvendes, skal jobcenter have underskrevet aftalen før påbegyndelse"
+        },
+        {
+          "type": "condition",
+          "source": "E10",
+          "target": "E11",
+          "description": "Løbende fremmøde forudsætter at tilbudsforløb er påbegyndt"
+        },
+        {
+          "type": "response",
+          "source": "E10",
+          "target": "E11",
+          "description": "Påbegyndelse af forløb medfører forventning om løbende fremmøde"
+        },
+        {
+          "type": "condition",
+          "source": "E10",
+          "target": "E11A",
+          "description": "Fravær pga. sygdom kan kun opstå under aktivt tilbudsforløb"
+        },
+        {
+          "type": "response",
+          "source": "E11A",
+          "target": "E12",
+          "description": "Når planlagt fremmøde ikke kan ske pga. sygdom, skal fravær straks meddeles"
+        },
+        {
+          "type": "condition",
+          "source": "E11A",
+          "target": "E12",
+          "description": "Sygdomsmeddelelse forudsætter en konkret fraværssituation"
+        },
+        {
+          "type": "condition",
+          "source": "E10",
+          "target": "E13",
+          "description": "Ferieaftale under tilbudsforløbet forudsætter aktivt forløb"
+        },
+        {
+          "type": "condition",
+          "source": "E13",
+          "target": "E13A",
+          "description": "Ferie under tilbudsforløbet kan kun afholdes hvis den er aftalt forinden"
+        },
+        {
+          "type": "condition",
+          "source": "E10",
+          "target": "E14A",
+          "description": "Udeblivelse kan kun registreres under et aktivt tilbudsforløb"
+        },
+        {
+          "type": "response",
+          "source": "E14A",
+          "target": "E14",
+          "description": "Registreret udeblivelse udløser pligt til at meddele jobcenteret om udeblivelsen"
+        },
+        {
+          "type": "condition",
+          "source": "E14A",
+          "target": "E14",
+          "description": "Meddelelse om udeblivelse forudsætter at udeblivelse er registreret"
+        },
+        {
+          "type": "condition",
+          "source": "E10",
+          "target": "E15",
+          "description": "Ophør af tilbud kan kun ske for et aktivt tilbudsforløb"
+        },
+        {
+          "type": "condition",
+          "source": "E10",
+          "target": "E31",
+          "description": "Tilbudsforløb kan kun afsluttes hvis det er påbegyndt"
+        },
+        {
+          "type": "condition",
+          "source": "E10",
+          "target": "E25A",
+          "description": "Skade omfattet af erstatningsregler kan kun opstå under aktivt tilbudsforløb"
+        },
+        {
+          "type": "condition",
+          "source": "E15",
+          "target": "E25A",
+          "description": "Skade skal være opstået før ophør af tilbud"
+        },
+        {
+          "type": "condition",
+          "source": "E31",
+          "target": "E25A",
+          "description": "Skade skal være opstået før afsluttet tilbudsforløb"
+        },
+        {
+          "type": "condition",
+          "source": "E25A",
+          "target": "E25",
+          "description": "Afgørelse om erstatning kan kun træffes for skader opstået under aktivt tilbudsforløb"
+        },
+        {
+          "type": "condition",
+          "source": "E20",
+          "target": "E21",
+          "description": "Jobcenters afgørelse om hjælpemidler/mentor forudsætter at virksomheden har ansøgt"
+        },
+        {
+          "type": "condition",
+          "source": "E1",
+          "target": "E21",
+          "description": "Afgørelse om hjælpemidler/mentor kræver et planlagt tilbud"
+        },
+        {
+          "type": "condition",
+          "source": "E10",
+          "target": "E21",
+          "description": "Alternativt kan afgørelse træffes for et allerede aktivt tilbud"
+        },
+        {
+          "type": "condition",
+          "source": "E21",
+          "target": "E21POS",
+          "description": "Positiv tilskudsbeslutning kan kun træffes efter en afgørelse om hjælpemidler/mentor"
+        },
+        {
+          "type": "condition",
+          "source": "E22",
+          "target": "E23",
+          "description": "Afklaring om tavshedspligt kan kun ske hvis der er kendskab til fortrolige oplysninger"
+        },
+        {
+          "type": "condition",
+          "source": "E22",
+          "target": "E24",
+          "description": "Overholdelse af tavshedspligt forudsætter kendskab til fortrolige oplysninger"
+        },
+        {
+          "type": "response",
+          "source": "E22",
+          "target": "E24",
+          "description": "Når der opnås kendskab til fortrolige oplysninger skal de ikke videregives"
+        },
+        {
+          "type": "condition",
+          "source": "E4",
+          "target": "E26",
+          "description": "Klage kan først indgives efter modtagelse af tilbud"
+        },
+        {
+          "type": "response",
+          "source": "E4",
+          "target": "E26",
+          "description": "Modtagelse af tilbud åbner mulighed for at klage inden for 4 uger"
+        },
+        {
+          "type": "milestone",
+          "source": "E4",
+          "target": "E26",
+          "description": "Klage skal være indgivet senest 4 uger efter modtagelse af tilbuddet (efter perioden må E26 ikke udføres)",
+          "duration": "P4W"
+        },
+        {
+          "type": "condition",
+          "source": "E26",
+          "target": "E27",
+          "description": "Jobcenter kan kun behandle en klage der er indgivet"
+        },
+        {
+          "type": "response",
+          "source": "E26",
+          "target": "E27",
+          "description": "Indgivet klage skal behandles af jobcenteret"
+        },
+        {
+          "type": "condition",
+          "source": "E27",
+          "target": "E28",
+          "description": "Medhold i klage kan først gives efter jobcenteret har behandlet klagen"
+        },
+        {
+          "type": "condition",
+          "source": "E27",
+          "target": "E29",
+          "description": "Manglende medhold og videresendelse kan først ske efter klagebehandling"
+        },
+        {
+          "type": "condition",
+          "source": "E29",
+          "target": "E30",
+          "description": "Ankestyrelsen kan først træffe afgørelse når klagen er videresendt fra jobcenteret"
+        },
+        {
+          "type": "response",
+          "source": "E10",
+          "target": "E32",
+          "description": "Når tilbudsforløb påbegyndes, sættes rådighedsforpligtelsen i bero"
+        },
+        {
+          "type": "condition",
+          "source": "E10",
+          "target": "E32",
+          "description": "Rådighed kan kun sættes i bero i forbindelse med et aktivt tilbudsforløb"
+        },
+        {
+          "type": "exclude",
+          "source": "E32",
+          "target": "E32",
+          "description": "Rådighedsforpligtelsen kan kun sættes i bero én gang per forløb"
+        },
+        {
+          "type": "response",
+          "source": "E31",
+          "target": "E33",
+          "description": "Når tilbudsforløb gennemføres og afsluttes, genaktiveres rådighedsforpligtelsen"
+        },
+        {
+          "type": "response",
+          "source": "E15",
+          "target": "E33",
+          "description": "Når tilbud ophører før tid, genaktiveres rådighedsforpligtelsen"
+        },
+        {
+          "type": "condition",
+          "source": "E32",
+          "target": "E33",
+          "description": "Genaktivering af rådighed forudsætter at forpligtelsen tidligere er sat i bero"
+        },
+        {
+          "type": "exclude",
+          "source": "E33",
+          "target": "E32",
+          "description": "Efter genaktivering kan rådighed ikke fortsat være i bero for samme forløb"
+        },
+        {
+          "type": "exclude",
+          "source": "E15",
+          "target": "E11",
+          "description": "Efter ophør af tilbud kan der ikke længere ske løbende fremmøde"
+        },
+        {
+          "type": "exclude",
+          "source": "E31",
+          "target": "E11",
+          "description": "Efter afsluttet tilbudsforløb kan der ikke længere ske løbende fremmøde"
+        },
+        {
+          "type": "condition",
+          "source": "E34",
+          "target": "E35",
+          "description": "Særlige regler for virksomhedspraktik/nytteindsats gælder kun når tilbudstypen er fastsat som sådan"
+        },
+        {
+          "type": "condition",
+          "source": "E10",
+          "target": "E35",
+          "description": "Arbejdsmiljø- og forskelsbehandlingsreglerne aktiveres ved påbegyndelse af forløbet"
+        }
+      ],
+      "marking": {
+        "executed": [],
+        "included": [
+          "E1",
+          "E2",
+          "E3",
+          "E4",
+          "E5",
+          "E6",
+          "E7",
+          "E8",
+          "E9",
+          "E10",
+          "E11",
+          "E11A",
+          "E12",
+          "E13",
+          "E13A",
+          "E14",
+          "E14A",
+          "E15",
+          "E16",
+          "E17",
+          "E18",
+          "E19",
+          "E20",
+          "E21",
+          "E21POS",
+          "E22",
+          "E23",
+          "E24",
+          "E25",
+          "E25A",
+          "E26",
+          "E27",
+          "E28",
+          "E29",
+          "E30",
+          "E31",
+          "E32",
+          "E33",
+          "E34",
+          "E35"
+        ],
+        "pending": []
+      }
+    }
+  ]
+}

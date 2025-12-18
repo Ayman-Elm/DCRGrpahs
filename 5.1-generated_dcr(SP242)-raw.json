@@ -1,0 +1,212 @@
+{
+  "DCRModel": [
+    {
+      "title": "Ansøgning om udvidet helbredstillæg",
+      "description": "Overordnet proces for ansøgning, formueopgørelse og kommunal afgørelse om udvidet helbredstillæg til tandproteser, briller og fodbehandling, inkl. løbende oplysningspligt.",
+      "type": "DCRModel",
+      "roles": [],
+      "events": [
+        {
+          "id": "use_paper_or_digital",
+          "label": "Vælg lovlig ansøgningskanal (digital, medmindre fritaget)"
+        },
+        {
+          "id": "submit_application",
+          "label": "Indgiv ansøgning om udvidet helbredstillæg til kommunen"
+        },
+        {
+          "id": "provider_submits_treatment_basis",
+          "label": "Behandler indsender tilbud/overslag/ansøgning digitalt"
+        },
+        {
+          "id": "fill_formue_form",
+          "label": "Udfyld formueskema til Udbetaling Danmark (hvis relevant)"
+        },
+        {
+          "id": "send_formue_to_udbetaling_dk",
+          "label": "Send formueopgørelse til Udbetaling Danmark"
+        },
+        {
+          "id": "udbetaling_dk_decides_formue",
+          "label": "Udbetaling Danmark afgør likvid formue"
+        },
+        {
+          "id": "udbetaling_dk_sends_formue_to_municipality",
+          "label": "Udbetaling Danmark sender formueoplysninger til kommunen"
+        },
+        {
+          "id": "check_personlig_tillaegsprocent",
+          "label": "Kontroller personlig tillægsprocent (> 0 for helbredstillæg)"
+        },
+        {
+          "id": "check_formue_limit",
+          "label": "Kontroller at likvid formue er under formuegrænsen"
+        },
+        {
+          "id": "municipality_assesses_necessity",
+          "label": "Kommunen vurderer om udgiften er nødvendig og omfattet"
+        },
+        {
+          "id": "calculate_helbredstillæg",
+          "label": "Beregn mulig udvidet helbredstillæg (85 % af nødvendig udgift)"
+        },
+        {
+          "id": "assess_specially_difficult_economic",
+          "label": "Vurder om ansøger er særligt vanskeligt stillet økonomisk"
+        },
+        {
+          "id": "assess_personligt_tillaeg",
+          "label": "Vurder evt. personligt tillæg til egenandelen"
+        },
+        {
+          "id": "municipality_decides_helbredstillæg",
+          "label": "Kommunen træffer afgørelse om helbredstillæg og evt. personligt tillæg"
+        },
+        {
+          "id": "notify_applicant_decision",
+          "label": "Orienter ansøger om kommunens afgørelse"
+        },
+        {
+          "id": "start_treatment",
+          "label": "Påbegynd behandling (tandprotese, briller eller fodbehandling)"
+        },
+        {
+          "id": "change_in_personal_or_economic_circumstances",
+          "label": "Ændring i personlige eller økonomiske forhold opstår"
+        },
+        {
+          "id": "inform_changes_to_kommune_or_udbetaling_dk",
+          "label": "Underret kommune/Udbetaling Danmark om ændringer i forhold"
+        }
+      ],
+      "rules": [
+        {
+          "type": "condition",
+          "source": "use_paper_or_digital",
+          "target": "submit_application",
+          "description": "Ansøgningen skal indgives via en lovlig kanal: digital selvbetjening, medmindre ansøger er fritaget og derfor lovligt kan bruge papirblanket."
+        },
+        {
+          "type": "condition",
+          "source": "submit_application",
+          "target": "municipality_assesses_necessity",
+          "description": "Kommunen kan først vurdere om udgiften er nødvendig, når der er indgivet en særskilt ansøgning om udvidet helbredstillæg."
+        },
+        {
+          "type": "condition",
+          "source": "provider_submits_treatment_basis",
+          "target": "municipality_assesses_necessity",
+          "description": "Kommunens vurdering af nødvendig og dækket behandling baseres på det indsendte tilbud/overslag/ansøgning fra behandler."
+        },
+        {
+          "type": "condition",
+          "source": "fill_formue_form",
+          "target": "send_formue_to_udbetaling_dk",
+          "description": "Formueopgørelsen skal udfyldes før den kan sendes til Udbetaling Danmark."
+        },
+        {
+          "type": "condition",
+          "source": "send_formue_to_udbetaling_dk",
+          "target": "udbetaling_dk_decides_formue",
+          "description": "Udbetaling Danmark kan først afgøre likvid formue efter at have modtaget formueopgørelsen."
+        },
+        {
+          "type": "condition",
+          "source": "udbetaling_dk_decides_formue",
+          "target": "udbetaling_dk_sends_formue_to_municipality",
+          "description": "Formueafgørelse skal være truffet, før oplysninger kan sendes til kommunen."
+        },
+        {
+          "type": "condition",
+          "source": "udbetaling_dk_sends_formue_to_municipality",
+          "target": "check_formue_limit",
+          "description": "Kommunens kontrol af formuegrænsen forudsætter formueoplysninger fra Udbetaling Danmark."
+        },
+        {
+          "type": "condition",
+          "source": "municipality_assesses_necessity",
+          "target": "calculate_helbredstillæg",
+          "description": "Beregning af et eventuelt helbredstillæg forudsætter, at kommunen har fastlagt nødvendig udgift og at ydelsen er omfattet."
+        },
+        {
+          "type": "condition",
+          "source": "check_personlig_tillaegsprocent",
+          "target": "calculate_helbredstillæg",
+          "description": "Der kan kun beregnes helbredstillæg, hvis personlig tillægsprocent er større end 0."
+        },
+        {
+          "type": "condition",
+          "source": "check_formue_limit",
+          "target": "calculate_helbredstillæg",
+          "description": "Der kan kun beregnes helbredstillæg, hvis likvid formue ligger under den fastsatte formuegrænse."
+        },
+        {
+          "type": "condition",
+          "source": "calculate_helbredstillæg",
+          "target": "municipality_decides_helbredstillæg",
+          "description": "Hvis der kan ydes helbredstillæg, skal beregningen indgå i kommunens afgørelse; hvis ikke, træffes afgørelse uden helbredstillæg."
+        },
+        {
+          "type": "condition",
+          "source": "assess_specially_difficult_economic",
+          "target": "assess_personligt_tillaeg",
+          "description": "Kommunen kan kun bevilge personligt tillæg, hvis ansøger vurderes særligt vanskeligt stillet økonomisk."
+        },
+        {
+          "type": "condition",
+          "source": "assess_personligt_tillaeg",
+          "target": "municipality_decides_helbredstillæg",
+          "description": "En vurdering af personligt tillæg til egenandelen skal indgå i afgørelsen, hvis der søges herom."
+        },
+        {
+          "type": "response",
+          "source": "municipality_decides_helbredstillæg",
+          "target": "notify_applicant_decision",
+          "description": "Efter at kommunen har truffet afgørelse, skal ansøger orienteres."
+        },
+        {
+          "type": "milestone",
+          "source": "municipality_decides_helbredstillæg",
+          "target": "start_treatment",
+          "description": "Behandling (tandprotese, briller eller fodbehandling) må først påbegyndes, når kommunen har truffet afgørelse om udvidet helbredstillæg."
+        },
+        {
+          "type": "condition",
+          "source": "change_in_personal_or_economic_circumstances",
+          "target": "inform_changes_to_kommune_or_udbetaling_dk",
+          "description": "Når der sker ændringer i personlige eller økonomiske forhold, skal ansøger straks underrette kommune/Udbetaling Danmark."
+        },
+        {
+          "type": "response",
+          "source": "change_in_personal_or_economic_circumstances",
+          "target": "inform_changes_to_kommune_or_udbetaling_dk",
+          "description": "Enhver ændring i forhold, der kan påvirke helbredstillægget, udløser en pligt til at give oplysninger til myndighederne."
+        }
+      ],
+      "marking": {
+        "executed": [],
+        "included": [
+          "use_paper_or_digital",
+          "submit_application",
+          "provider_submits_treatment_basis",
+          "fill_formue_form",
+          "send_formue_to_udbetaling_dk",
+          "udbetaling_dk_decides_formue",
+          "udbetaling_dk_sends_formue_to_municipality",
+          "check_personlig_tillaegsprocent",
+          "check_formue_limit",
+          "municipality_assesses_necessity",
+          "calculate_helbredstillæg",
+          "assess_specially_difficult_economic",
+          "assess_personligt_tillaeg",
+          "municipality_decides_helbredstillæg",
+          "notify_applicant_decision",
+          "start_treatment",
+          "change_in_personal_or_economic_circumstances",
+          "inform_changes_to_kommune_or_udbetaling_dk"
+        ],
+        "pending": []
+      }
+    }
+  ]
+}

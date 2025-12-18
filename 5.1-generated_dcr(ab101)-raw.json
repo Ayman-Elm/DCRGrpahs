@@ -1,0 +1,428 @@
+{
+  "DCRModel": [
+    {
+      "title": "Tilbud efter lov om en aktiv beskæftigelsesindsats",
+      "description": "Proces for tilbud, bekræftelse og aftale om tilbud efter lov om en aktiv beskæftigelsesindsats, inkl. information om pligter, klage og fravær.",
+      "type": "DCRModel",
+      "roles": [],
+      "events": [
+        {
+          "id": "opret_tilbud",
+          "label": "Jobcenter udarbejder tilbud om aktiv beskæftigelsesindsats"
+        },
+        {
+          "id": "vaelg_tilbudstype",
+          "label": "Jobcenter vælger tilbudstype (vejledning, uddannelse, virksomhedspraktik, nytteindsats)"
+        },
+        {
+          "id": "angiv_tilbudsperiode_og_sted",
+          "label": "Angiv tilbudsperiode, ugentligt timetal og sted"
+        },
+        {
+          "id": "angiv_kontaktperson_og_info",
+          "label": "Angiv kontaktperson, adresse, telefon og evt. e-mail"
+        },
+        {
+          "id": "tilfoej_yderligere_beskrivelse",
+          "label": "Tilføj yderligere beskrivelse og evt. fremmødekrav/bilag"
+        },
+        {
+          "id": "angiv_min_plan",
+          "label": "Registrer at tilbuddet indgår i 'Min Plan'"
+        },
+        {
+          "id": "angiv_formaal_med_tilbud",
+          "label": "Angiv formålet med tilbuddet"
+        },
+        {
+          "id": "angiv_maalgruppe_ydelse",
+          "label": "Angiv målgruppe og ydelsestype (§ 6, nr. 2-13 mv.)"
+        },
+        {
+          "id": "angiv_godtgoerelse_befordring",
+          "label": "Angiv godtgørelse og befordringsgodtgørelse (§ 175-176)"
+        },
+        {
+          "id": "angiv_frigivelse_rådighed",
+          "label": "Angiv fritagelse for rådighedsforpligtelse under tilbud (§ 56)"
+        },
+        {
+          "id": "oplys_tavshedspligt",
+          "label": "Oplys om tavshedspligt"
+        },
+        {
+          "id": "oplys_klagevejledning",
+          "label": "Oplys klagevejledning med 4 ugers frist"
+        },
+        {
+          "id": "angiv_fravaerspligt_og_ferie",
+          "label": "Angiv pligt til at melde sygdom og aftale ferie"
+        },
+        {
+          "id": "angiv_erstatningsforhold",
+          "label": "Oplys om erstatningsforhold og arbejdsskade"
+        },
+        {
+          "id": "oplys_saerligt_praktik_nytte",
+          "label": "Oplys særligt om virksomhedspraktik/nytteindsats"
+        },
+        {
+          "id": "send_tilbud_til_tilbudsmodtager",
+          "label": "Send tilbudsdokument (blad 1) til tilbudsmodtager"
+        },
+        {
+          "id": "modtag_tilbud",
+          "label": "Tilbudsmodtager modtager tilbuddet"
+        },
+        {
+          "id": "tilbudsmodtager_underskriver_bekraeftelse",
+          "label": "Tilbudsmodtager underskriver bekræftelse af tilbud (blad 2)"
+        },
+        {
+          "id": "returner_blad2_til_jobcenter",
+          "label": "Tilbudsmodtager returnerer blad 2, side 1 og 2 til jobcenter"
+        },
+        {
+          "id": "opret_individuel_aftale",
+          "label": "Jobcenter og tilbudssted udarbejder individuel aftale om tilbudsforløb (blad 3)"
+        },
+        {
+          "id": "tilbudsmodtager_underskriver_aftale",
+          "label": "Tilbudsmodtager underskriver aftale om tilbud (blad 3)"
+        },
+        {
+          "id": "tilbudssted_underskriver_aftale",
+          "label": "Tilbudssted underskriver aftale om tilbud (blad 3)"
+        },
+        {
+          "id": "jobcenter_underskriver_aftale",
+          "label": "Jobcenter underskriver aftale om tilbud (blad 3)"
+        },
+        {
+          "id": "returner_aftale_til_jobcenter",
+          "label": "Tilbudssted/tilbudsmodtager returnerer underskrevet aftale til jobcenter"
+        },
+        {
+          "id": "angiv_kommunikation_og_opfoelgning",
+          "label": "Fastlæg kommunikation, kontaktpersoner og opfølgning"
+        },
+        {
+          "id": "start_tilbudsforloeb",
+          "label": "Tilbudsforløb påbegyndes"
+        },
+        {
+          "id": "tilbudsmodtager_moeder_foerste_dag",
+          "label": "Tilbudsmodtager møder første dag på aftalt tidspunkt"
+        },
+        {
+          "id": "haandter_fravaer_sygdom",
+          "label": "Tilbudsmodtager melder fravær pga. sygdom"
+        },
+        {
+          "id": "aftael_ferie_under_tilbud",
+          "label": "Aftal ferie under tilbudsforløbet"
+        },
+        {
+          "id": "tilbudssted_melder_udeblivelse_eller_ophoer",
+          "label": "Tilbudsstedet melder udeblivelse eller ophør til jobcenter"
+        },
+        {
+          "id": "ansoeg_hjaelpemidler_mentor",
+          "label": "Virksomhed ansøger jobcenter om hjælpemidler/mentorordning"
+        },
+        {
+          "id": "gennemfoer_tilbudsforloeb",
+          "label": "Tilbudsforløbet gennemføres i perioden"
+        },
+        {
+          "id": "afslut_tilbudsforloeb",
+          "label": "Tilbudsforløb afsluttes"
+        },
+        {
+          "id": "tilbudsmodtager_kan_klage",
+          "label": "Tilbudsmodtager indgiver klage over tilbuddet"
+        },
+        {
+          "id": "jobcenter_behandler_klage",
+          "label": "Jobcenter behandler klage"
+        },
+        {
+          "id": "videresend_klage_til_ankestyrelsen",
+          "label": "Jobcenter videresender klage til Ankestyrelsen ved manglende medhold"
+        }
+      ],
+      "rules": [
+        {
+          "type": "response",
+          "source": "opret_tilbud",
+          "target": "vaelg_tilbudstype",
+          "description": "Når jobcenter udarbejder et tilbud, skal en tilbudstype vælges."
+        },
+        {
+          "type": "response",
+          "source": "vaelg_tilbudstype",
+          "target": "angiv_tilbudsperiode_og_sted",
+          "description": "Efter valg af tilbudstype skal periode og sted angives."
+        },
+        {
+          "type": "response",
+          "source": "angiv_tilbudsperiode_og_sted",
+          "target": "angiv_kontaktperson_og_info",
+          "description": "Når periode og sted er angivet, skal kontaktoplysninger udfyldes."
+        },
+        {
+          "type": "response",
+          "source": "angiv_kontaktperson_og_info",
+          "target": "tilfoej_yderligere_beskrivelse",
+          "description": "Efter kontaktinfo kan yderligere beskrivelse og fremmødekrav tilføjes."
+        },
+        {
+          "type": "response",
+          "source": "tilfoej_yderligere_beskrivelse",
+          "target": "angiv_min_plan",
+          "description": "Når tilbuddet er beskrevet, registreres om det indgår i 'Min Plan'."
+        },
+        {
+          "type": "response",
+          "source": "angiv_min_plan",
+          "target": "angiv_formaal_med_tilbud",
+          "description": "Efter registrering i 'Min Plan' angives formålet med tilbuddet."
+        },
+        {
+          "type": "response",
+          "source": "angiv_formaal_med_tilbud",
+          "target": "angiv_maalgruppe_ydelse",
+          "description": "Når formålet er angivet, skal målgruppe og ydelse angives."
+        },
+        {
+          "type": "response",
+          "source": "angiv_maalgruppe_ydelse",
+          "target": "angiv_godtgoerelse_befordring",
+          "description": "Efter målgruppe og ydelse angives eventuel godtgørelse og befordring."
+        },
+        {
+          "type": "response",
+          "source": "angiv_godtgoerelse_befordring",
+          "target": "angiv_frigivelse_rådighed",
+          "description": "Efter økonomiske oplysninger angives fritagelse for rådighed."
+        },
+        {
+          "type": "response",
+          "source": "angiv_frigivelse_rådighed",
+          "target": "oplys_tavshedspligt",
+          "description": "Når rådighedsforhold er angivet, skal tavshedspligten oplyses."
+        },
+        {
+          "type": "response",
+          "source": "oplys_tavshedspligt",
+          "target": "oplys_klagevejledning",
+          "description": "Efter tavshedspligt skal klagevejledning oplyses."
+        },
+        {
+          "type": "response",
+          "source": "oplys_klagevejledning",
+          "target": "angiv_fravaerspligt_og_ferie",
+          "description": "Efter klagevejledning skal pligt til at melde fravær og ferie beskrives."
+        },
+        {
+          "type": "response",
+          "source": "angiv_fravaerspligt_og_ferie",
+          "target": "angiv_erstatningsforhold",
+          "description": "Efter fraværsregler oplyses erstatningsforhold."
+        },
+        {
+          "type": "response",
+          "source": "angiv_erstatningsforhold",
+          "target": "oplys_saerligt_praktik_nytte",
+          "description": "Efter erstatning oplyses særlige regler for praktik/nytteindsats."
+        },
+        {
+          "type": "response",
+          "source": "oplys_saerligt_praktik_nytte",
+          "target": "send_tilbud_til_tilbudsmodtager",
+          "description": "Når alle oplysninger er udfyldt, sendes tilbuddet til borgeren."
+        },
+        {
+          "type": "condition",
+          "source": "send_tilbud_til_tilbudsmodtager",
+          "target": "modtag_tilbud",
+          "description": "Borgeren kan først modtage tilbuddet, når det er sendt."
+        },
+        {
+          "type": "response",
+          "source": "modtag_tilbud",
+          "target": "tilbudsmodtager_underskriver_bekraeftelse",
+          "description": "Når tilbuddet er modtaget, kan borgeren underskrive bekræftelsen."
+        },
+        {
+          "type": "condition",
+          "source": "tilbudsmodtager_underskriver_bekraeftelse",
+          "target": "returner_blad2_til_jobcenter",
+          "description": "Blad 2 kan kun returneres, når det er underskrevet."
+        },
+        {
+          "type": "response",
+          "source": "tilbudsmodtager_underskriver_bekraeftelse",
+          "target": "returner_blad2_til_jobcenter",
+          "description": "Efter underskrift skal bekræftelsen returneres til jobcenteret."
+        },
+        {
+          "type": "response",
+          "source": "opret_tilbud",
+          "target": "opret_individuel_aftale",
+          "description": "I visse tilfælde udarbejdes en individuel aftale om tilbudsforløbet."
+        },
+        {
+          "type": "condition",
+          "source": "opret_individuel_aftale",
+          "target": "tilbudsmodtager_underskriver_aftale",
+          "description": "Tilbudsmodtager kan kun underskrive, når aftalen er udarbejdet."
+        },
+        {
+          "type": "response",
+          "source": "tilbudsmodtager_underskriver_aftale",
+          "target": "tilbudssted_underskriver_aftale",
+          "description": "Efter borgerens underskrift skal tilbudsstedet underskrive aftalen."
+        },
+        {
+          "type": "response",
+          "source": "tilbudssted_underskriver_aftale",
+          "target": "jobcenter_underskriver_aftale",
+          "description": "Når tilbudsstedet har underskrevet, underskriver jobcenteret."
+        },
+        {
+          "type": "condition",
+          "source": "jobcenter_underskriver_aftale",
+          "target": "returner_aftale_til_jobcenter",
+          "description": "Den fuldt underskrevne aftale skal returneres til jobcenteret."
+        },
+        {
+          "type": "response",
+          "source": "jobcenter_underskriver_aftale",
+          "target": "returner_aftale_til_jobcenter",
+          "description": "Efter sidste underskrift returneres aftalen til jobcenteret."
+        },
+        {
+          "type": "response",
+          "source": "returner_blad2_til_jobcenter",
+          "target": "angiv_kommunikation_og_opfoelgning",
+          "description": "Når bekræftelsen er modtaget, fastlægges kommunikation og opfølgning."
+        },
+        {
+          "type": "response",
+          "source": "angiv_kommunikation_og_opfoelgning",
+          "target": "start_tilbudsforloeb",
+          "description": "Når kommunikation og opfølgning er aftalt, kan tilbudsforløbet starte."
+        },
+        {
+          "type": "condition",
+          "source": "start_tilbudsforloeb",
+          "target": "tilbudsmodtager_moeder_foerste_dag",
+          "description": "Tilbudsmodtager kan kun møde første dag, når forløbet er startet."
+        },
+        {
+          "type": "response",
+          "source": "tilbudsmodtager_moeder_foerste_dag",
+          "target": "gennemfoer_tilbudsforloeb",
+          "description": "Når borgeren møder første dag, gennemføres tilbudsforløbet i perioden."
+        },
+        {
+          "type": "response",
+          "source": "gennemfoer_tilbudsforloeb",
+          "target": "afslut_tilbudsforloeb",
+          "description": "Efter gennemført periode afsluttes tilbudsforløbet."
+        },
+        {
+          "type": "response",
+          "source": "modtag_tilbud",
+          "target": "tilbudsmodtager_kan_klage",
+          "description": "Efter modtagelse af tilbuddet kan borgeren klage inden 4 uger."
+        },
+        {
+          "type": "condition",
+          "source": "modtag_tilbud",
+          "target": "tilbudsmodtager_kan_klage",
+          "description": "Klage kan kun ske, hvis tilbuddet er modtaget."
+        },
+        {
+          "type": "response",
+          "source": "tilbudsmodtager_kan_klage",
+          "target": "jobcenter_behandler_klage",
+          "description": "Jobcenteret skal behandle en indgivet klage."
+        },
+        {
+          "type": "response",
+          "source": "jobcenter_behandler_klage",
+          "target": "videresend_klage_til_ankestyrelsen",
+          "description": "Hvis der ikke gives medhold, videresendes klagen til Ankestyrelsen."
+        },
+        {
+          "type": "response",
+          "source": "start_tilbudsforloeb",
+          "target": "haandter_fravaer_sygdom",
+          "description": "Under tilbudsforløbet kan der opstå fravær pga. sygdom, som skal meldes."
+        },
+        {
+          "type": "response",
+          "source": "start_tilbudsforloeb",
+          "target": "aftael_ferie_under_tilbud",
+          "description": "Under tilbudsforløbet kan ferie aftales efter vejledningen."
+        },
+        {
+          "type": "response",
+          "source": "haandter_fravaer_sygdom",
+          "target": "tilbudssted_melder_udeblivelse_eller_ophoer",
+          "description": "Ved udeblivelse eller ophør skal tilbudsstedet give jobcenteret besked."
+        },
+        {
+          "type": "response",
+          "source": "start_tilbudsforloeb",
+          "target": "ansoeg_hjaelpemidler_mentor",
+          "description": "I forbindelse med tilbuddet kan virksomheden ansøge om hjælpemidler eller mentor."
+        }
+      ],
+      "marking": {
+        "executed": [],
+        "included": [
+          "opret_tilbud",
+          "vaelg_tilbudstype",
+          "angiv_tilbudsperiode_og_sted",
+          "angiv_kontaktperson_og_info",
+          "tilfoej_yderligere_beskrivelse",
+          "angiv_min_plan",
+          "angiv_formaal_med_tilbud",
+          "angiv_maalgruppe_ydelse",
+          "angiv_godtgoerelse_befordring",
+          "angiv_frigivelse_rådighed",
+          "oplys_tavshedspligt",
+          "oplys_klagevejledning",
+          "angiv_fravaerspligt_og_ferie",
+          "angiv_erstatningsforhold",
+          "oplys_saerligt_praktik_nytte",
+          "send_tilbud_til_tilbudsmodtager",
+          "modtag_tilbud",
+          "tilbudsmodtager_underskriver_bekraeftelse",
+          "returner_blad2_til_jobcenter",
+          "opret_individuel_aftale",
+          "tilbudsmodtager_underskriver_aftale",
+          "tilbudssted_underskriver_aftale",
+          "jobcenter_underskriver_aftale",
+          "returner_aftale_til_jobcenter",
+          "angiv_kommunikation_og_opfoelgning",
+          "start_tilbudsforloeb",
+          "tilbudsmodtager_moeder_foerste_dag",
+          "haandter_fravaer_sygdom",
+          "aftael_ferie_under_tilbud",
+          "tilbudssted_melder_udeblivelse_eller_ophoer",
+          "ansoeg_hjaelpemidler_mentor",
+          "gennemfoer_tilbudsforloeb",
+          "afslut_tilbudsforloeb",
+          "tilbudsmodtager_kan_klage",
+          "jobcenter_behandler_klage",
+          "videresend_klage_til_ankestyrelsen"
+        ],
+        "pending": []
+      }
+    }
+  ]
+}

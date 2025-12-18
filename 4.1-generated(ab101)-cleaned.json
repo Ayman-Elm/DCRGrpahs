@@ -1,0 +1,273 @@
+{
+  "DCRModel": [
+    {
+      "title": "Activation Offer Process (Danish Employment Effort Act)",
+      "description": "Issuance, acceptance, and participation in Danish statutory activation, including eligibility, notifications, support requests, complaint handling, confidentiality and availability rules.",
+      "type": "DCRModel",
+      "roles": [],
+      "events": [
+        {
+          "id": "issue_offer",
+          "label": "Issuance of activation offer by jobcenter"
+        },
+        {
+          "id": "offer_info_complete",
+          "label": "Offer contains correct and complete mandatory information"
+        },
+        {
+          "id": "eligibility_check",
+          "label": "Eligibility/benefit group requirements checked"
+        },
+        {
+          "id": "receive_review_offer",
+          "label": "Recipient receives and reviews offer"
+        },
+        {
+          "id": "sign_receipt",
+          "label": "Recipient signs and returns receipt of offer"
+        },
+        {
+          "id": "initiate_individual_agreement",
+          "label": "Entering into individual agreement (optional)"
+        },
+        {
+          "id": "sign_agreement_all",
+          "label": "All parties sign individual agreement"
+        },
+        {
+          "id": "start_participation",
+          "label": "Recipient begins participation in the offer/program"
+        },
+        {
+          "id": "exempt_availability",
+          "label": "Recipient exempted from general availability requirement"
+        },
+        {
+          "id": "confidentiality_obligation",
+          "label": "Recipient observes confidentiality during the offer"
+        },
+        {
+          "id": "notify_absence_illness",
+          "label": "Recipient notifies offer location of absence due to illness"
+        },
+        {
+          "id": "notify_vacation",
+          "label": "Recipient requests/obtains approval for vacation"
+        },
+        {
+          "id": "notify_termination_by_location",
+          "label": "Offer location notifies jobcenter of absence/termination"
+        },
+        {
+          "id": "request_support_measures",
+          "label": "Offer location requests support measures (aids, mentor) from jobcenter"
+        },
+        {
+          "id": "submit_complaint",
+          "label": "Recipient submits complaint about the offer"
+        },
+        {
+          "id": "handle_complaint_jobcenter",
+          "label": "Jobcenter handles complaint"
+        },
+        {
+          "id": "forward_to_appeals_board",
+          "label": "Jobcenter forwards complaint to Appeals Board"
+        },
+        {
+          "id": "end_participation",
+          "label": "Participation in offer ends"
+        }
+      ],
+      "rules": [
+        {
+          "type": "response",
+          "source": "issue_offer",
+          "target": "offer_info_complete",
+          "description": "The jobcenter must ensure the offer contains all required information."
+        },
+        {
+          "type": "response",
+          "source": "issue_offer",
+          "target": "eligibility_check",
+          "description": "Eligibility/benefit group must be verified after offer is issued."
+        },
+        {
+          "type": "condition",
+          "source": "offer_info_complete",
+          "target": "receive_review_offer",
+          "description": "Recipient can review offer only if information is complete and correct."
+        },
+        {
+          "type": "condition",
+          "source": "issue_offer",
+          "target": "receive_review_offer",
+          "description": "Recipient cannot review offer before it is issued."
+        },
+        {
+          "type": "condition",
+          "source": "eligibility_check",
+          "target": "sign_receipt",
+          "description": "Recipient can sign the receipt only if eligibility is confirmed."
+        },
+        {
+          "type": "condition",
+          "source": "offer_info_complete",
+          "target": "sign_receipt",
+          "description": "Signing the receipt requires correct/complete offer info."
+        },
+        {
+          "type": "condition",
+          "source": "receive_review_offer",
+          "target": "sign_receipt",
+          "description": "Offer must be reviewed before receipt is signed."
+        },
+        {
+          "type": "include",
+          "source": "initiate_individual_agreement",
+          "target": "sign_agreement_all",
+          "description": "If individual agreement is made, then signatures by all parties are required."
+        },
+        {
+          "type": "condition",
+          "source": "initiate_individual_agreement",
+          "target": "sign_agreement_all",
+          "description": "Signing agreement requires the agreement being initiated."
+        },
+        {
+          "type": "milestone",
+          "source": "sign_receipt",
+          "target": "start_participation",
+          "description": "Participation cannot start before receipt is signed."
+        },
+        {
+          "type": "milestone",
+          "source": "sign_agreement_all",
+          "target": "start_participation",
+          "description": "If an agreement exists, it must be signed before participation can start."
+        },
+        {
+          "type": "condition",
+          "source": "eligibility_check",
+          "target": "start_participation",
+          "description": "Participation can only begin if eligibility is confirmed."
+        },
+        {
+          "type": "response",
+          "source": "start_participation",
+          "target": "exempt_availability",
+          "description": "Recipient becomes exempt from availability requirement while participating."
+        },
+        {
+          "type": "response",
+          "source": "start_participation",
+          "target": "confidentiality_obligation",
+          "description": "Recipient must observe confidentiality during participation."
+        },
+        {
+          "type": "include",
+          "source": "start_participation",
+          "target": "notify_absence_illness",
+          "description": "Absence notifications are only relevant while participating."
+        },
+        {
+          "type": "include",
+          "source": "start_participation",
+          "target": "notify_vacation",
+          "description": "Vacation notifications are only relevant while participating."
+        },
+        {
+          "type": "include",
+          "source": "start_participation",
+          "target": "request_support_measures",
+          "description": "Support measures can only be requested during participation."
+        },
+        {
+          "type": "condition",
+          "source": "sign_receipt",
+          "target": "request_support_measures",
+          "description": "Support measures can only be requested after receipt is signed."
+        },
+        {
+          "type": "condition",
+          "source": "offer_info_complete",
+          "target": "request_support_measures",
+          "description": "Support measures require full offer information confirmed."
+        },
+        {
+          "type": "condition",
+          "source": "eligibility_check",
+          "target": "request_support_measures",
+          "description": "Support measures can only be requested if eligibility has been confirmed."
+        },
+        {
+          "type": "response",
+          "source": "notify_absence_illness",
+          "target": "notify_termination_by_location",
+          "description": "Repeated/persistent absence may trigger location to notify jobcenter."
+        },
+        {
+          "type": "response",
+          "source": "end_participation",
+          "target": "notify_termination_by_location",
+          "description": "Location must notify jobcenter if the offer ends or recipient stops attending."
+        },
+        {
+          "type": "condition",
+          "source": "sign_receipt",
+          "target": "submit_complaint",
+          "description": "Complaint can only be submitted after receipt of the offer."
+        },
+        {
+          "type": "milestone",
+          "source": "sign_receipt",
+          "target": "submit_complaint",
+          "description": "Complaint must be submitted within 4 weeks of receipt signature.",
+          "duration": "P4W"
+        },
+        {
+          "type": "response",
+          "source": "submit_complaint",
+          "target": "handle_complaint_jobcenter",
+          "description": "Jobcenter handles complaint after submission."
+        },
+        {
+          "type": "response",
+          "source": "handle_complaint_jobcenter",
+          "target": "forward_to_appeals_board",
+          "description": "If complaint is not upheld, it is forwarded to the Appeals Board."
+        },
+        {
+          "type": "response",
+          "source": "start_participation",
+          "target": "end_participation",
+          "description": "Participation will eventually end."
+        }
+      ],
+      "marking": {
+        "executed": [],
+        "included": [
+          "issue_offer",
+          "offer_info_complete",
+          "eligibility_check",
+          "receive_review_offer",
+          "sign_receipt",
+          "initiate_individual_agreement",
+          "sign_agreement_all",
+          "start_participation",
+          "exempt_availability",
+          "confidentiality_obligation",
+          "notify_absence_illness",
+          "notify_vacation",
+          "notify_termination_by_location",
+          "request_support_measures",
+          "submit_complaint",
+          "handle_complaint_jobcenter",
+          "forward_to_appeals_board",
+          "end_participation"
+        ],
+        "pending": []
+      }
+    }
+  ]
+}

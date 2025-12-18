@@ -1,0 +1,257 @@
+{
+  "DCRModel": [
+    {
+      "title": "Proces for Tilbud efter Lov om en Aktiv Beskæftigelsesindsats",
+      "description": "Model for udstedelse, bekræftelse og gennemførelse af tilbud om beskæftigelsesindsats herunder retur af udfyldte dokumenter, flersidig aftalesignering, vejledning, tavshedspligts-erkendelse og klagehåndtering.",
+      "type": "DCRModel",
+      "roles": [],
+      "events": [
+        {
+          "id": "udsted_tilbud",
+          "label": "Udsted tilbud"
+        },
+        {
+          "id": "modtag_vejledning",
+          "label": "Modtag vejledning om regler og rettigheder"
+        },
+        {
+          "id": "modtag_tilbud",
+          "label": "Modtag tilbud"
+        },
+        {
+          "id": "erkend_tavshedspligt",
+          "label": "Erkend tavshedspligt"
+        },
+        {
+          "id": "returner_blad2_side1",
+          "label": "Returner bekræftelse blad 2, side 1"
+        },
+        {
+          "id": "returner_blad2_side2",
+          "label": "Returner bekræftelse blad 2, side 2"
+        },
+        {
+          "id": "indga_individuel_aftale",
+          "label": "Initiér individuel aftale (hvis relevant, blad 3)"
+        },
+        {
+          "id": "signer_aftale_tilbudsmodtager",
+          "label": "Tilbudsmodtager underskriver individuel aftale"
+        },
+        {
+          "id": "signer_aftale_tilbudssted",
+          "label": "Tilbudssted underskriver individuel aftale"
+        },
+        {
+          "id": "signer_aftale_jobcenter",
+          "label": "Jobcenter underskriver individuel aftale"
+        },
+        {
+          "id": "returner_underskrevet_aftale",
+          "label": "Returner underskrevet individuel aftale (blad 3), hvis relevant"
+        },
+        {
+          "id": "start_tilbudsforloeb",
+          "label": "Start tilbudsforløb"
+        },
+        {
+          "id": "meddel_fravaer_sygdom",
+          "label": "Meddel fravær pga. sygdom"
+        },
+        {
+          "id": "aftal_ferie",
+          "label": "Aftal ferie"
+        },
+        {
+          "id": "tilbudssted_melder_udebliv_ophor",
+          "label": "Tilbudssted melder udeblivelse/ophør til jobcenter"
+        },
+        {
+          "id": "afslut_tilbud",
+          "label": "Afslut tilbudsforløb"
+        },
+        {
+          "id": "klage_over_tilbud",
+          "label": "Indsend klage over tilbud"
+        },
+        {
+          "id": "videre_send_klage",
+          "label": "Send klage videre til Ankestyrelsen"
+        }
+      ],
+      "rules": [
+        {
+          "type": "response",
+          "source": "udsted_tilbud",
+          "target": "modtag_vejledning",
+          "description": "Vejledning om rettigheder og regler leveres med tilbud."
+        },
+        {
+          "type": "response",
+          "source": "udsted_tilbud",
+          "target": "modtag_tilbud",
+          "description": "Modtagelse sker efter udstedelse."
+        },
+        {
+          "type": "response",
+          "source": "modtag_tilbud",
+          "target": "erkend_tavshedspligt",
+          "description": "Bekræft tavshedspligt efter modtagelse."
+        },
+        {
+          "type": "response",
+          "source": "modtag_tilbud",
+          "target": "returner_blad2_side1",
+          "description": "Bekræftelse (blad 2, side 1) returneres efter modtag."
+        },
+        {
+          "type": "response",
+          "source": "modtag_tilbud",
+          "target": "returner_blad2_side2",
+          "description": "Bekræftelse (blad 2, side 2) returneres efter modtag."
+        },
+        {
+          "type": "milestone",
+          "source": "returner_blad2_side1",
+          "target": "start_tilbudsforloeb",
+          "description": "Begge sider af blad 2 skal returneres for at starte forløb."
+        },
+        {
+          "type": "milestone",
+          "source": "returner_blad2_side2",
+          "target": "start_tilbudsforloeb",
+          "description": "Begge sider af blad 2 skal returneres for at starte forløb."
+        },
+        {
+          "type": "response",
+          "source": "modtag_tilbud",
+          "target": "indga_individuel_aftale",
+          "description": "Evt. individuel aftale kan initieres efter modtagelse."
+        },
+        {
+          "type": "response",
+          "source": "indga_individuel_aftale",
+          "target": "signer_aftale_tilbudsmodtager",
+          "description": "Tilbudsmodtager skal underskrive."
+        },
+        {
+          "type": "response",
+          "source": "signer_aftale_tilbudsmodtager",
+          "target": "signer_aftale_tilbudssted",
+          "description": "Tilbudssted skal underskrive."
+        },
+        {
+          "type": "response",
+          "source": "signer_aftale_tilbudssted",
+          "target": "signer_aftale_jobcenter",
+          "description": "Jobcenter skal underskrive."
+        },
+        {
+          "type": "condition",
+          "source": "signer_aftale_tilbudsmodtager",
+          "target": "returner_underskrevet_aftale",
+          "description": "Alle tre parter skal have underskrevet aftalen før den returneres."
+        },
+        {
+          "type": "condition",
+          "source": "signer_aftale_tilbudssted",
+          "target": "returner_underskrevet_aftale",
+          "description": "Alle tre parter skal have underskrevet aftalen før den returneres."
+        },
+        {
+          "type": "condition",
+          "source": "signer_aftale_jobcenter",
+          "target": "returner_underskrevet_aftale",
+          "description": "Alle tre parter skal have underskrevet aftalen før den returneres."
+        },
+        {
+          "type": "milestone",
+          "source": "returner_underskrevet_aftale",
+          "target": "start_tilbudsforloeb",
+          "description": "Underskrevet og returneret aftale påkrævet før start, hvis relevant."
+        },
+        {
+          "type": "milestone",
+          "source": "start_tilbudsforloeb",
+          "target": "meddel_fravaer_sygdom",
+          "description": "Fravær kan kun meldes efter forløbsstart."
+        },
+        {
+          "type": "milestone",
+          "source": "start_tilbudsforloeb",
+          "target": "aftal_ferie",
+          "description": "Ferie kan kun aftales efter forløbsstart."
+        },
+        {
+          "type": "milestone",
+          "source": "start_tilbudsforloeb",
+          "target": "tilbudssted_melder_udebliv_ophor",
+          "description": "Udeblivelse/ophør kan først meldes efter opstart."
+        },
+        {
+          "type": "milestone",
+          "source": "start_tilbudsforloeb",
+          "target": "afslut_tilbud",
+          "description": "Forløbet kan kun afsluttes når det er startet."
+        },
+        {
+          "type": "milestone",
+          "source": "modtag_tilbud",
+          "target": "klage_over_tilbud",
+          "description": "Klage kan først indsendes efter modtagelse."
+        },
+        {
+          "type": "response",
+          "source": "klage_over_tilbud",
+          "target": "videre_send_klage",
+          "description": "Hvis jobcenter ikke giver medhold, videresendes klagen."
+        },
+        {
+          "type": "milestone",
+          "source": "modtag_tilbud",
+          "target": "returner_blad2_side1",
+          "description": "Bekræftelse på blad 2, side 1 skal returneres inden deadline.",
+          "duration": "P4W"
+        },
+        {
+          "type": "milestone",
+          "source": "modtag_tilbud",
+          "target": "returner_blad2_side2",
+          "description": "Bekræftelse på blad 2, side 2 skal returneres inden deadline.",
+          "duration": "P4W"
+        },
+        {
+          "type": "milestone",
+          "source": "modtag_tilbud",
+          "target": "klage_over_tilbud",
+          "description": "Klage skal indsendes senest 4 uger efter modtagelse.",
+          "duration": "P4W"
+        }
+      ],
+      "marking": {
+        "executed": [],
+        "included": [
+          "udsted_tilbud",
+          "modtag_vejledning",
+          "modtag_tilbud",
+          "erkend_tavshedspligt",
+          "returner_blad2_side1",
+          "returner_blad2_side2",
+          "indga_individuel_aftale",
+          "signer_aftale_tilbudsmodtager",
+          "signer_aftale_tilbudssted",
+          "signer_aftale_jobcenter",
+          "returner_underskrevet_aftale",
+          "start_tilbudsforloeb",
+          "meddel_fravaer_sygdom",
+          "aftal_ferie",
+          "tilbudssted_melder_udebliv_ophor",
+          "afslut_tilbud",
+          "klage_over_tilbud",
+          "videre_send_klage"
+        ],
+        "pending": []
+      }
+    }
+  ]
+}

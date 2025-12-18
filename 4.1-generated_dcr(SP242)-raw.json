@@ -1,0 +1,379 @@
+{
+  "DCRModel": [
+    {
+      "title": "Udvidet helbredstillæg – Ansøgningsproces og Udbetaling",
+      "description": "Proces for ansøgning om udvidet helbredstillæg til tandprotese, briller og fodbehandling, med eksklusive indsendelsesveje, økonomisk kontrol, selvstændig behandling af personligt tillæg, and endelig afgørelse før behandling.",
+      "type": "DCRModel",
+      "roles": [],
+      "events": [
+        {
+          "id": "check_digital_exemption",
+          "label": "Afklare om ansøger er digitalt fritaget"
+        },
+        {
+          "id": "submit_application_digital",
+          "label": "Indsend digital ansøgning inkl. dokumentation"
+        },
+        {
+          "id": "submit_application_paper",
+          "label": "Indsend papiransøgning inkl. dokumentation"
+        },
+        {
+          "id": "select_tandprotese",
+          "label": "Ansøgning om tilskud til tandprotese"
+        },
+        {
+          "id": "select_briller",
+          "label": "Ansøgning om tilskud til briller"
+        },
+        {
+          "id": "select_fodbehandling",
+          "label": "Ansøgning om tilskud til fodbehandling"
+        },
+        {
+          "id": "doc_cheapest_removable_tandprotese",
+          "label": "Dokumentation: billigste tilstrækkelige aftagelige tandprotese"
+        },
+        {
+          "id": "doc_briller_standard",
+          "label": "Dokumentation: standardbrille/permanente briller med særlige krav"
+        },
+        {
+          "id": "doc_fodbehandling_eligibility",
+          "label": "Dokumentation: berettiget fodbehandling efter regler"
+        },
+        {
+          "id": "fill_and_sign_application_form",
+          "label": "Udfyld og underskriv ansøgningsskema"
+        },
+        {
+          "id": "prepare_and_sign_financial_statement",
+          "label": "Udfyld og underskriv formueskema"
+        },
+        {
+          "id": "submit_financial_statement",
+          "label": "Indsend formueskema til Udbetaling Danmark"
+        },
+        {
+          "id": "income_and_asset_control",
+          "label": "Udbetaling Danmark vurderer indkomst og formue"
+        },
+        {
+          "id": "check_personal_percent_above_zero",
+          "label": "Tjek personlig tillægsprocent > 0"
+        },
+        {
+          "id": "check_fortune_below_threshold",
+          "label": "Tjek likvid formue under grænsen"
+        },
+        {
+          "id": "municipal_decision_grant",
+          "label": "Kommunen træffer afgørelse og meddeler tilskud (positiv afgørelse)"
+        },
+        {
+          "id": "municipal_decision_reject",
+          "label": "Kommunen træffer afgørelse og meddeler afslag (negativ afgørelse)"
+        },
+        {
+          "id": "start_treatment",
+          "label": "Behandlingen påbegyndes"
+        },
+        {
+          "id": "make_payment",
+          "label": "Udbetaling/afregning af helbredstillæg eller betaling til leverandør"
+        },
+        {
+          "id": "apply_for_personligt_tillaeg",
+          "label": "Ansøg om personligt tillæg (egenandel/merudgifter)"
+        },
+        {
+          "id": "decision_on_personligt_tillaeg",
+          "label": "Kommunen afgør ansøgning om personligt tillæg"
+        },
+        {
+          "id": "information_check",
+          "label": "Kommunal kontrol af oplysninger"
+        },
+        {
+          "id": "repayment_claim",
+          "label": "Krav om tilbagebetaling ved fejlagtige/manglende oplysninger"
+        },
+        {
+          "id": "sanction",
+          "label": "Sanktioner ved bevidst urigtige oplysninger"
+        },
+        {
+          "id": "change_report",
+          "label": "Ansøger melder ændringer i forhold"
+        }
+      ],
+      "rules": [
+        {
+          "type": "include",
+          "source": "check_digital_exemption",
+          "target": "submit_application_paper",
+          "description": "Papiransøgning aktiveres kun hvis fritaget for digitalt"
+        },
+        {
+          "type": "exclude",
+          "source": "check_digital_exemption",
+          "target": "submit_application_digital",
+          "description": "Digital ansøgning udelukkes hvis fritaget"
+        },
+        {
+          "type": "exclude",
+          "source": "submit_application_digital",
+          "target": "submit_application_paper",
+          "description": "Digital ansøgning udelukker papiransøgning (mutual exclusion)"
+        },
+        {
+          "type": "exclude",
+          "source": "submit_application_paper",
+          "target": "submit_application_digital",
+          "description": "Papiransøgning udelukker digital ansøgning (mutual exclusion)"
+        },
+        {
+          "type": "condition",
+          "source": "select_tandprotese",
+          "target": "doc_cheapest_removable_tandprotese",
+          "description": "Kun billigste aftagelige tandprotese kan tilskudsberettiges"
+        },
+        {
+          "type": "condition",
+          "source": "select_briller",
+          "target": "doc_briller_standard",
+          "description": "Kun standardbriller/permanente briller med krav kan tilskudsberettiges"
+        },
+        {
+          "type": "condition",
+          "source": "select_fodbehandling",
+          "target": "doc_fodbehandling_eligibility",
+          "description": "Kun berettiget fodbehandling efter specifikke regler"
+        },
+        {
+          "type": "condition",
+          "source": "doc_cheapest_removable_tandprotese",
+          "target": "submit_application_digital",
+          "description": "Dokumentation på tandprotese krævet før digital ansøgning"
+        },
+        {
+          "type": "condition",
+          "source": "doc_briller_standard",
+          "target": "submit_application_digital",
+          "description": "Dokumentation på briller krævet før digital ansøgning"
+        },
+        {
+          "type": "condition",
+          "source": "doc_fodbehandling_eligibility",
+          "target": "submit_application_digital",
+          "description": "Dokumentation på fodbehandling krævet før digital ansøgning"
+        },
+        {
+          "type": "condition",
+          "source": "doc_cheapest_removable_tandprotese",
+          "target": "submit_application_paper",
+          "description": "Dokumentation på tandprotese krævet før papiransøgning"
+        },
+        {
+          "type": "condition",
+          "source": "doc_briller_standard",
+          "target": "submit_application_paper",
+          "description": "Dokumentation på briller krævet før papiransøgning"
+        },
+        {
+          "type": "condition",
+          "source": "doc_fodbehandling_eligibility",
+          "target": "submit_application_paper",
+          "description": "Dokumentation på fodbehandling krævet før papiransøgning"
+        },
+        {
+          "type": "condition",
+          "source": "fill_and_sign_application_form",
+          "target": "submit_application_digital",
+          "description": "Ansøgning skal være udfyldt og underskrevet før digital indsendelse"
+        },
+        {
+          "type": "condition",
+          "source": "fill_and_sign_application_form",
+          "target": "submit_application_paper",
+          "description": "Ansøgning skal være udfyldt og underskrevet før papirindsendelse"
+        },
+        {
+          "type": "condition",
+          "source": "prepare_and_sign_financial_statement",
+          "target": "submit_financial_statement",
+          "description": "Formueskema skal være udfyldt og underskrevet før indsendelse"
+        },
+        {
+          "type": "condition",
+          "source": "submit_application_digital",
+          "target": "municipal_decision_grant",
+          "description": "Beslutning kræver at digital ansøgning er modtaget"
+        },
+        {
+          "type": "condition",
+          "source": "submit_application_paper",
+          "target": "municipal_decision_grant",
+          "description": "Beslutning kræver at papiransøgning er modtaget"
+        },
+        {
+          "type": "condition",
+          "source": "submit_financial_statement",
+          "target": "municipal_decision_grant",
+          "description": "Beslutning kræver formueoplysninger er modtaget"
+        },
+        {
+          "type": "condition",
+          "source": "income_and_asset_control",
+          "target": "municipal_decision_grant",
+          "description": "Økonomisk vurdering skal være afsluttet før beslutning"
+        },
+        {
+          "type": "condition",
+          "source": "check_personal_percent_above_zero",
+          "target": "municipal_decision_grant",
+          "description": "Afgørelse kræver personlig tillægsprocent > 0"
+        },
+        {
+          "type": "condition",
+          "source": "check_fortune_below_threshold",
+          "target": "municipal_decision_grant",
+          "description": "Afgørelse kræver likvid formue under grænsen"
+        },
+        {
+          "type": "condition",
+          "source": "submit_application_digital",
+          "target": "municipal_decision_reject",
+          "description": "Afgørelse kræver at digital ansøgning er modtaget"
+        },
+        {
+          "type": "condition",
+          "source": "submit_application_paper",
+          "target": "municipal_decision_reject",
+          "description": "Afgørelse kræver at papiransøgning er modtaget"
+        },
+        {
+          "type": "condition",
+          "source": "submit_financial_statement",
+          "target": "municipal_decision_reject",
+          "description": "Beslutning kræver formueoplysninger er modtaget"
+        },
+        {
+          "type": "condition",
+          "source": "income_and_asset_control",
+          "target": "municipal_decision_reject",
+          "description": "Økonomisk vurdering skal være afsluttet før beslutning"
+        },
+        {
+          "type": "exclude",
+          "source": "check_personal_percent_above_zero",
+          "target": "municipal_decision_grant",
+          "description": "Hvis personlig tillægsprocent ≤ 0, kan tilskud ikke bevilges"
+        },
+        {
+          "type": "exclude",
+          "source": "check_fortune_below_threshold",
+          "target": "municipal_decision_grant",
+          "description": "Hvis formue over grænse, kan tilskud ikke bevilges"
+        },
+        {
+          "type": "condition",
+          "source": "municipal_decision_grant",
+          "target": "start_treatment",
+          "description": "Behandlingen må først begynde efter positiv beslutning"
+        },
+        {
+          "type": "condition",
+          "source": "municipal_decision_grant",
+          "target": "make_payment",
+          "description": "Udbetaling kun hvis tilskud bevilges"
+        },
+        {
+          "type": "exclude",
+          "source": "municipal_decision_reject",
+          "target": "start_treatment",
+          "description": "Ingen behandling efter afslag"
+        },
+        {
+          "type": "exclude",
+          "source": "municipal_decision_reject",
+          "target": "make_payment",
+          "description": "Ingen udbetaling ved afslag"
+        },
+        {
+          "type": "response",
+          "source": "start_treatment",
+          "target": "make_payment",
+          "description": "Udbetaling/afregning kan først ske når behandling starter"
+        },
+        {
+          "type": "condition",
+          "source": "apply_for_personligt_tillaeg",
+          "target": "decision_on_personligt_tillaeg",
+          "description": "Personligt tillæg kræver særskilt ansøgning og vurdering"
+        },
+        {
+          "type": "response",
+          "source": "information_check",
+          "target": "repayment_claim",
+          "description": "Forkerte oplysninger kan udløse tilbagebetalingskrav"
+        },
+        {
+          "type": "response",
+          "source": "information_check",
+          "target": "sanction",
+          "description": "Bevidst urigtige oplysninger kan føre til sanktion"
+        },
+        {
+          "type": "response",
+          "source": "change_report",
+          "target": "municipal_decision_grant",
+          "description": "Ændringer kan kræve fornyet vurdering og mulig bevilling"
+        },
+        {
+          "type": "response",
+          "source": "change_report",
+          "target": "municipal_decision_reject",
+          "description": "Ændringer kan kræve ny vurdering og evt. afslag"
+        },
+        {
+          "type": "response",
+          "source": "change_report",
+          "target": "repayment_claim",
+          "description": "Ændringer kan lede til tilbagebetalingskrav hvis forudsætninger bortfalder"
+        }
+      ],
+      "marking": {
+        "executed": [],
+        "included": [
+          "check_digital_exemption",
+          "submit_application_digital",
+          "submit_application_paper",
+          "select_tandprotese",
+          "select_briller",
+          "select_fodbehandling",
+          "doc_cheapest_removable_tandprotese",
+          "doc_briller_standard",
+          "doc_fodbehandling_eligibility",
+          "fill_and_sign_application_form",
+          "prepare_and_sign_financial_statement",
+          "submit_financial_statement",
+          "income_and_asset_control",
+          "check_personal_percent_above_zero",
+          "check_fortune_below_threshold",
+          "municipal_decision_grant",
+          "municipal_decision_reject",
+          "start_treatment",
+          "make_payment",
+          "apply_for_personligt_tillaeg",
+          "decision_on_personligt_tillaeg",
+          "information_check",
+          "repayment_claim",
+          "sanction",
+          "change_report"
+        ],
+        "pending": []
+      }
+    }
+  ]
+}

@@ -139,13 +139,13 @@ def main() -> None:
     errors = validate_dcrmodel(model)
 
     if errors:
-        print("❌ INVALID DCR JSON")
+        print(" INVALID DCR JSON")
         for e in errors:
             print(" -", e)
         sys.exit(1)
     else:
         title = model.get("title") or "Untitled"
-        print(f"✅ VALID DCR JSON for model: {title}")
+        print(f" VALID DCR JSON for model: {title}")
         sys.exit(0)
 
 

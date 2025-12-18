@@ -1,0 +1,344 @@
+{
+  "DCRModel": [
+    {
+      "title": "Application Process for Extended Health Allowance",
+      "description": "Legal and procedural flow for Danish pensioners applying for extended health allowance, incorporating eligibility, consent, documentation, and treatment-specific rules with strict essentials for process start and order.",
+      "type": "DCRModel",
+      "roles": [],
+      "events": [
+        {
+          "id": "applicant_identified_and_consents",
+          "label": "Applicant is properly identified and provides all required consents (privacy law)"
+        },
+        {
+          "id": "declare_digital_exemption",
+          "label": "Applicant declares exemption from digital self-service, if applicable"
+        },
+        {
+          "id": "provide_documentation",
+          "label": "Applicant provides required provider quotations and documentation"
+        },
+        {
+          "id": "submit_wealth_statement",
+          "label": "Applicant submits current wealth statement to Udbetaling Danmark"
+        },
+        {
+          "id": "submit_application",
+          "label": "Applicant submits application for extended health allowance"
+        },
+        {
+          "id": "municipality_receives_reviews",
+          "label": "Municipality receives and reviews application and supporting documents"
+        },
+        {
+          "id": "municipality_requests_info",
+          "label": "Municipality requests additional information from provider (with consent)"
+        },
+        {
+          "id": "udbetaling_dk_provides_info",
+          "label": "Udbetaling Danmark provides wealth and income information to municipality"
+        },
+        {
+          "id": "check_supplement_percentage",
+          "label": "Check that applicant's personal supplement percentage is greater than 0"
+        },
+        {
+          "id": "check_liquidity_threshold",
+          "label": "Check that liquidity (applicant and spouse/cohabitant) is below statutory threshold"
+        },
+        {
+          "id": "treatment_check_removable_denture",
+          "label": "Verify dental treatment eligibility (removable dentures vs. fixed, proper calculation)"
+        },
+        {
+          "id": "treatment_check_glasses",
+          "label": "Verify glasses eligibility (standard types, no progressive/contact lenses, meets criteria)"
+        },
+        {
+          "id": "treatment_check_footcare",
+          "label": "Verify foot care eligibility (not covered by other legislation, patient is eligible)"
+        },
+        {
+          "id": "treatment_not_started_check",
+          "label": "Confirm treatment has not been started before decision"
+        },
+        {
+          "id": "municipality_evaluates_eligibility",
+          "label": "Municipality evaluates necessity and full eligibility"
+        },
+        {
+          "id": "municipality_decision",
+          "label": "Municipality issues decision (approval or rejection)"
+        },
+        {
+          "id": "exception_personal_supplement",
+          "label": "Municipality grants personal supplement in exceptional hardship"
+        },
+        {
+          "id": "calculate_allowance_rules",
+          "label": "Allowance calculated (85% of minimum/price-agreed/actual cost as per rules)"
+        },
+        {
+          "id": "pay_allowance",
+          "label": "Allowance is paid to applicant or provider"
+        },
+        {
+          "id": "register_and_share_info",
+          "label": "Municipality registers outcome and shares information as required"
+        },
+        {
+          "id": "report_changes",
+          "label": "Applicant reports changes in personal or financial circumstances"
+        },
+        {
+          "id": "review_update_case",
+          "label": "Municipality or Udbetaling Danmark reviews/updates case based on new info"
+        },
+        {
+          "id": "treatment_already_started_monitor",
+          "label": "Check or detection: Treatment has already started/completed prior to decision"
+        },
+        {
+          "id": "applicant_appeals_aux",
+          "label": "Applicant submits appeal or request for reconsideration (auxiliary/post-process)"
+        }
+      ],
+      "rules": [
+        {
+          "type": "condition",
+          "source": "applicant_identified_and_consents",
+          "target": "declare_digital_exemption",
+          "description": "No exemption declaration unless applicant is properly identified and has provided consent"
+        },
+        {
+          "type": "condition",
+          "source": "applicant_identified_and_consents",
+          "target": "provide_documentation",
+          "description": "No documentation can be provided until identification and consent"
+        },
+        {
+          "type": "condition",
+          "source": "applicant_identified_and_consents",
+          "target": "submit_wealth_statement",
+          "description": "No wealth statement submission until identification and consent"
+        },
+        {
+          "type": "condition",
+          "source": "applicant_identified_and_consents",
+          "target": "submit_application",
+          "description": "No application submission permitted until proper identification and consent"
+        },
+        {
+          "type": "condition",
+          "source": "applicant_identified_and_consents",
+          "target": "municipality_receives_reviews",
+          "description": "No municipal review can begin until identification and consent are ensured"
+        },
+        {
+          "type": "condition",
+          "source": "applicant_identified_and_consents",
+          "target": "municipality_evaluates_eligibility",
+          "description": "Eligibility cannot be evaluated without applicant identification and consent"
+        },
+        {
+          "type": "condition",
+          "source": "applicant_identified_and_consents",
+          "target": "municipality_decision",
+          "description": "No decision is possible without identification and consent"
+        },
+        {
+          "type": "exclude",
+          "source": "treatment_already_started_monitor",
+          "target": "submit_application",
+          "description": "Application cannot proceed if treatment already started or completed"
+        },
+        {
+          "type": "exclude",
+          "source": "treatment_already_started_monitor",
+          "target": "municipality_receives_reviews",
+          "description": "Municipality cannot process applications if treatment already started"
+        },
+        {
+          "type": "exclude",
+          "source": "treatment_already_started_monitor",
+          "target": "municipality_evaluates_eligibility",
+          "description": "Eligibility cannot be evaluated if treatment already started"
+        },
+        {
+          "type": "exclude",
+          "source": "treatment_already_started_monitor",
+          "target": "municipality_decision",
+          "description": "No decision can be made if treatment already started"
+        },
+        {
+          "type": "exclude",
+          "source": "treatment_already_started_monitor",
+          "target": "calculate_allowance_rules",
+          "description": "No allowance calculation if treatment has started"
+        },
+        {
+          "type": "exclude",
+          "source": "treatment_already_started_monitor",
+          "target": "pay_allowance",
+          "description": "No payment if treatment already started"
+        },
+        {
+          "type": "condition",
+          "source": "declare_digital_exemption",
+          "target": "submit_application",
+          "description": "Exemption declaration is required before paper application (if not digital)"
+        },
+        {
+          "type": "condition",
+          "source": "provide_documentation",
+          "target": "submit_application",
+          "description": "Documentation/quotes must be provided before or with application"
+        },
+        {
+          "type": "condition",
+          "source": "submit_wealth_statement",
+          "target": "submit_application",
+          "description": "Wealth statement must be submitted before or with application"
+        },
+        {
+          "type": "condition",
+          "source": "submit_application",
+          "target": "municipality_receives_reviews",
+          "description": "Application must be submitted before review"
+        },
+        {
+          "type": "condition",
+          "source": "provide_documentation",
+          "target": "municipality_receives_reviews",
+          "description": "Documentation/quotes must be available for municipal review"
+        },
+        {
+          "type": "condition",
+          "source": "udbetaling_dk_provides_info",
+          "target": "municipality_evaluates_eligibility",
+          "description": "Wealth/income info must be obtained before eligibility evaluation"
+        },
+        {
+          "type": "condition",
+          "source": "municipality_receives_reviews",
+          "target": "municipality_evaluates_eligibility",
+          "description": "Review must precede eligibility evaluation"
+        },
+        {
+          "type": "condition",
+          "source": "check_supplement_percentage",
+          "target": "municipality_evaluates_eligibility",
+          "description": "Personal supplement percentage must be > 0 prior to evaluation"
+        },
+        {
+          "type": "condition",
+          "source": "check_liquidity_threshold",
+          "target": "municipality_evaluates_eligibility",
+          "description": "Liquidity below threshold must be verified before evaluation"
+        },
+        {
+          "type": "condition",
+          "source": "treatment_check_removable_denture",
+          "target": "municipality_evaluates_eligibility",
+          "description": "Removable denture rules must be checked for dental cases"
+        },
+        {
+          "type": "condition",
+          "source": "treatment_check_glasses",
+          "target": "municipality_evaluates_eligibility",
+          "description": "Standard glasses eligibility must be checked for all optical applications"
+        },
+        {
+          "type": "condition",
+          "source": "treatment_check_footcare",
+          "target": "municipality_evaluates_eligibility",
+          "description": "Foot care eligibility and exclusions must be checked"
+        },
+        {
+          "type": "condition",
+          "source": "treatment_not_started_check",
+          "target": "municipality_evaluates_eligibility",
+          "description": "Treatment must not have started before eligibility evaluation"
+        },
+        {
+          "type": "milestone",
+          "source": "municipality_evaluates_eligibility",
+          "target": "municipality_decision",
+          "description": "Eligibility must be fully and correctly evaluated before decision"
+        },
+        {
+          "type": "include",
+          "source": "exception_personal_supplement",
+          "target": "municipality_decision",
+          "description": "Personal supplement may be granted in exceptional hardship"
+        },
+        {
+          "type": "response",
+          "source": "municipality_decision",
+          "target": "calculate_allowance_rules",
+          "description": "Decision triggers allowance calculation per legal formula"
+        },
+        {
+          "type": "response",
+          "source": "calculate_allowance_rules",
+          "target": "pay_allowance",
+          "description": "Calculated allowance then paid out"
+        },
+        {
+          "type": "response",
+          "source": "pay_allowance",
+          "target": "register_and_share_info",
+          "description": "Payment triggers information registration/sharing"
+        },
+        {
+          "type": "condition",
+          "source": "report_changes",
+          "target": "review_update_case",
+          "description": "Reported changes may require review/update"
+        },
+        {
+          "type": "response",
+          "source": "review_update_case",
+          "target": "municipality_decision",
+          "description": "Case review/update can lead to a new decision"
+        },
+        {
+          "type": "condition",
+          "source": "municipality_decision",
+          "target": "applicant_appeals_aux",
+          "description": "Appeal/reconsideration is only possible after decision"
+        }
+      ],
+      "marking": {
+        "executed": [],
+        "included": [
+          "applicant_identified_and_consents",
+          "declare_digital_exemption",
+          "provide_documentation",
+          "submit_wealth_statement",
+          "submit_application",
+          "municipality_receives_reviews",
+          "municipality_requests_info",
+          "udbetaling_dk_provides_info",
+          "check_supplement_percentage",
+          "check_liquidity_threshold",
+          "treatment_check_removable_denture",
+          "treatment_check_glasses",
+          "treatment_check_footcare",
+          "treatment_not_started_check",
+          "municipality_evaluates_eligibility",
+          "municipality_decision",
+          "exception_personal_supplement",
+          "calculate_allowance_rules",
+          "pay_allowance",
+          "register_and_share_info",
+          "report_changes",
+          "review_update_case",
+          "treatment_already_started_monitor",
+          "applicant_appeals_aux"
+        ],
+        "pending": []
+      }
+    }
+  ]
+}
